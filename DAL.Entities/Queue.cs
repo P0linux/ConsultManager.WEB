@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DAL.Entities
 {
-    class Queue: BaseEntity
+    public class Queue: BaseEntity
     {
         public IssueCategory IssueCategory { get; set; }
         public int Priority { get; set; }

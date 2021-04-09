@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DAL.Entities
 {
-    class Consultation: BaseEntity
+    public class Consultation: BaseEntity
     {
         public DateTime Date  { get; set; }
 

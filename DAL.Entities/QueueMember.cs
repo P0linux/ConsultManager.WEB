@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DAL.Entities
 {
-    class QueueMember: BaseEntity
+    public class QueueMember: BaseEntity
     {
         public int Priority { get; set; }
         public TimeSpan TimeInterval { get; set; }
