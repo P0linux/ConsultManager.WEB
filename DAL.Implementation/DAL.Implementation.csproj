@@ -8,4 +8,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DAL.Abstraction\DAL.Abstraction.csproj" />
+  </ItemGroup>
+
 </Project>

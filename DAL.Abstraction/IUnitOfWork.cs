@@ -14,6 +14,5 @@ namespace DAL.Abstraction
         IRepository<Subject> SubjectRepository { get; }
 
         Task CommitAsync();
-        Task RollbackAsync();
     }
 }
