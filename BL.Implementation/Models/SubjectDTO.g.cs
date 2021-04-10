@@ -1,4 +1,4 @@
-namespace DAL.Entities
+namespace BL.Implementation.Models
 {
     public partial class SubjectDTO
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace DAL.Entities
+namespace BL.Implementation.Models
 {
     public partial class ConsultationDTO
     {

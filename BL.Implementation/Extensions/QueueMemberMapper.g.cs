@@ -1,8 +1,9 @@
 using System;
 using System.Linq.Expressions;
+using BL.Implementation.Models;
 using DAL.Entities;
 
-namespace DAL.Entities
+namespace BL.Implementation.Extensions
 {
     public static partial class QueueMemberMapper
     {
