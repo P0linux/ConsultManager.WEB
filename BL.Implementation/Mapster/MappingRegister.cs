@@ -30,11 +30,13 @@ namespace BL.Implementation.Mapster
             return builder
                 .ForAllTypesInNamespace(Assembly.GetAssembly(typeof(BaseEntity)), "DAL.Entities")
                 .ExcludeTypes(typeof(BaseEntity), typeof(User))
+                .ExcludeTypes(type => type.IsEnum)
                 .ShallowCopyForSameType(true)
-                .ForType<Consultation>(cfg => cfg.Ignore(c => c.Lecturer))
+                .ForType<Consultation>(cfg => cfg.Ignore(c => c.Lecturer)
+                                                 .Ignore(c => c.Subject))
                 .ForType<Queue>(cfg => cfg.Ignore(q => q.Consultation))
                 .ForType<QueueMember>(cfg => cfg.Ignore(qm => qm.Student)
-                .Ignore(qm => qm.Queue));
+                                                .Ignore(qm => qm.Queue));
         }
     } 
 }
