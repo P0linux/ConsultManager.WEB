@@ -10,7 +10,7 @@ namespace DAL.Entities
 
         public int SubjectId { get; set; }
         public Subject Subject { get; set; }
-        public int LecturerUserId { get; set; }
-        public User LecturerUser { get; set; }
+        public int LecturerId { get; set; }
+        public User Lecturer { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace DAL.Entities
 
         public Queue Queue { get; set; }
         public int QueueId { get; set; }
-        public  User StudentUser { get; set; }
-        public int StudentUserId { get; set; }
+        public  User Student { get; set; }
+        public int StudentId { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace DAL.Entities
         public int ConsultationId { get; set; }
     }
 
-    enum IssueCategory
+    public enum IssueCategory
     {
         Theoretical,
         Code,
