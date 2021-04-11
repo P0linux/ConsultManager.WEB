@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BL.DTO.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +8,10 @@ namespace BL.Abstraction
 {
     public interface IConsultationService
     {
-        Task<IEnumerable<ConsultationDTO>>
+        Task<IEnumerable<ConsultationDTO>> GetAllAsync();
+        Task AddAsync(ConsultationDTO consultation);
+        Task DeleteByIdAsync(int id);
+        Task<ConsultationDTO> GetByIdAsync(int id);
+        Task UpdateAsync(ConsultationDTO consultation);
     }
 }
