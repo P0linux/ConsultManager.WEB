@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using DAL.Entities;
 using Microsoft.AspNetCore.Identity;
+using DAL.Abstraction;
 
 namespace DAL.Implementation
 {
@@ -24,6 +25,8 @@ namespace DAL.Implementation
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<ApplicationContext>();
 
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
             return services;
         }
     }
