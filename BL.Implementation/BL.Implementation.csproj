@@ -12,9 +12,11 @@
 
   <ItemGroup>
     <PackageReference Include="Mapster" Version="7.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.5" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BL.DTO\BL.DTO.csproj" />
     <ProjectReference Include="..\DAL.Entities\DAL.Entities.csproj" />
   </ItemGroup>
 

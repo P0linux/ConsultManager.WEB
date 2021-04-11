@@ -1,6 +1,5 @@
-using DAL.Entities;
 
-namespace BL.Implementation.Models
+namespace BL.DTO.Models
 {
     public partial class QueueDTO
     {
@@ -8,5 +7,12 @@ namespace BL.Implementation.Models
         public int Priority { get; set; }
         public int ConsultationId { get; set; }
         public int Id { get; set; }
+    }
+
+    public enum IssueCategory
+    {
+        Theoretical,
+        Code,
+        Pass
     }
 }

@@ -1,6 +1,6 @@
 using System;
 using System.Linq.Expressions;
-using BL.Implementation.Models;
+using BL.DTO.Models;
 using DAL.Entities;
 
 namespace BL.Implementation.Extensions

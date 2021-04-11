@@ -1,4 +1,4 @@
-namespace BL.Implementation.Models
+namespace BL.DTO.Models
 {
     public partial class UserDTO
     {
