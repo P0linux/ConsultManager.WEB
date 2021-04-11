@@ -25,8 +25,8 @@ namespace DAL.Implementation
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<ApplicationContext>();
 
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
-            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             return services;
         }
     }
