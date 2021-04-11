@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BL.Abstraction\BL.Abstraction.csproj" />
     <ProjectReference Include="..\BL.DTO\BL.DTO.csproj" />
     <ProjectReference Include="..\DAL.Entities\DAL.Entities.csproj" />
   </ItemGroup>
