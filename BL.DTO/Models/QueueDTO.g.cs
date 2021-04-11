@@ -8,11 +8,4 @@ namespace BL.DTO.Models
         public int ConsultationId { get; set; }
         public int Id { get; set; }
     }
-
-    public enum IssueCategory
-    {
-        Theoretical,
-        Code,
-        Pass
-    }
 }

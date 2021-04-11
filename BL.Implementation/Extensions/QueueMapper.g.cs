@@ -11,7 +11,7 @@ namespace BL.Implementation.Extensions
         {
             return p1 == null ? null : new Queue()
             {
-                IssueCategory = p1.IssueCategory,
+                IssueCategory = p1.IssueCategory.ToString(),
                 Priority = p1.Priority,
                 ConsultationId = p1.ConsultationId,
                 Id = p1.Id
@@ -25,7 +25,7 @@ namespace BL.Implementation.Extensions
             }
             Queue result = p3 ?? new Queue();
             
-            result.IssueCategory = p2.IssueCategory;
+            result.IssueCategory = p2.IssueCategory.ToString();
             result.Priority = p2.Priority;
             result.ConsultationId = p2.ConsultationId;
             result.Id = p2.Id;
@@ -34,7 +34,7 @@ namespace BL.Implementation.Extensions
         }
         public static Expression<Func<QueueDTO, Queue>> ProjectToQueue => p4 => new Queue()
         {
-            IssueCategory = p4.IssueCategory,
+            IssueCategory = p4.IssueCategory.ToString(),
             Priority = p4.Priority,
             ConsultationId = p4.ConsultationId,
             Id = p4.Id
@@ -43,7 +43,7 @@ namespace BL.Implementation.Extensions
         {
             return p5 == null ? null : new QueueDTO()
             {
-                IssueCategory = p5.IssueCategory,
+                IssueCategory = (IssueCategory)Enum.Parse(typeof(IssueCategory), p5.IssueCategory),
                 Priority = p5.Priority,
                 ConsultationId = p5.ConsultationId,
                 Id = p5.Id
@@ -57,7 +57,7 @@ namespace BL.Implementation.Extensions
             }
             QueueDTO result = p7 ?? new QueueDTO();
             
-            result.IssueCategory = p6.IssueCategory;
+            result.IssueCategory = (IssueCategory)Enum.Parse(typeof(IssueCategory) ,p6.IssueCategory);
             result.Priority = p6.Priority;
             result.ConsultationId = p6.ConsultationId;
             result.Id = p6.Id;
@@ -66,7 +66,7 @@ namespace BL.Implementation.Extensions
         }
         public static Expression<Func<Queue, QueueDTO>> ProjectToDTO => p8 => new QueueDTO()
         {
-            IssueCategory = p8.IssueCategory,
+            IssueCategory = (IssueCategory)Enum.Parse(typeof(IssueCategory), p8.IssueCategory),
             Priority = p8.Priority,
             ConsultationId = p8.ConsultationId,
             Id = p8.Id
