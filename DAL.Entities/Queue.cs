@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DAL.Entities
+﻿namespace DAL.Entities
 {
-    public class Queue: BaseEntity
+    public class Queue : BaseEntity
     {
         public string IssueCategory { get; set; }
         public int Priority { get; set; }

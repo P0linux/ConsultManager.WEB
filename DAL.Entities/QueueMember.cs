@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DAL.Entities
 {
-    public class QueueMember: BaseEntity
+    public class QueueMember : BaseEntity
     {
         public int Priority { get; set; }
         public TimeSpan TimeInterval { get; set; }
@@ -12,7 +10,7 @@ namespace DAL.Entities
 
         public Queue Queue { get; set; }
         public int QueueId { get; set; }
-        public  User Student { get; set; }
+        public User Student { get; set; }
         public int StudentId { get; set; }
     }
 }

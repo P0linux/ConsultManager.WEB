@@ -1,13 +1,10 @@
 ﻿using DAL.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DAL.Implementation
 {
-    class ApplicationContext: IdentityDbContext<User>
+    class ApplicationContext : IdentityDbContext<User>
     {
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)

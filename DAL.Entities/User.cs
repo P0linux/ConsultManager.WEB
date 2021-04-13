@@ -1,12 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace DAL.Entities
 {
-    public class User: IdentityUser
+    public class User : IdentityUser
     {
         [DataMember]
         public string FirstName { get; set; }

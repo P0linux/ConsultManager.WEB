@@ -2,8 +2,6 @@
 using BL.DTO.Models;
 using Microsoft.AspNetCore.Identity;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BL.Implementation.Services

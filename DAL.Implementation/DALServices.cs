@@ -1,11 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using DAL.Abstraction;
 using DAL.Entities;
 using Microsoft.AspNetCore.Identity;
-using DAL.Abstraction;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DAL.Implementation
 {

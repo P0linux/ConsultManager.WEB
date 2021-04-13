@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BL.DTO
+﻿namespace BL.DTO
 {
     public enum IssueCategory
     {
-        Theoretical, 
+        Theoretical,
         Pass,
         Code
     }

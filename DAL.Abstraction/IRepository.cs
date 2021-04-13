@@ -1,12 +1,10 @@
-﻿using System;
+﻿using DAL.Entities;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using DAL.Entities;
 
 namespace DAL.Abstraction
 {
-    public interface IRepository<TEntity> where TEntity: BaseEntity
+    public interface IRepository<TEntity> where TEntity : BaseEntity
     {
         Task<IEnumerable<TEntity>> GetAllAsync();
         Task<TEntity> GetByIdAsync(int id);
