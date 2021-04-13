@@ -1,5 +1,7 @@
 ﻿using BL.Abstraction;
 using BL.DTO.Models;
+using BL.Implementation.Extensions;
+using DAL.Abstraction;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,29 +10,43 @@ namespace BL.Implementation.Services
 {
     class SubjectService : ISubjectService
     {
-        public Task AddAsync(SubjectDTO subject)
+        IUnitOfWork _unitOfWork;
+        public SubjectService(IUnitOfWork unitOfWork)
         {
-            throw new NotImplementedException();
+            _unitOfWork = unitOfWork;
         }
 
-        public Task DeleteByIdAsync(int id)
+        public async Task AddAsync(SubjectDTO subject)
         {
-            throw new NotImplementedException();
+            await _unitOfWork.SubjectRepository.InsertAsync(subject.AdaptToSubject());
+            await _unitOfWork.CommitAsync();
         }
 
-        public Task<IEnumerable<SubjectDTO>> GetAllAsync()
+        public async Task DeleteByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var subject = await _unitOfWork.SubjectRepository.GetByIdAsync(id);
+            _unitOfWork.SubjectRepository.Delete(subject);
+
+            await _unitOfWork.CommitAsync();
         }
 
-        public Task<SubjectDTO> GetByIdAsync(int id)
+        public async Task<IEnumerable<SubjectDTO>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var subject = await _unitOfWork.SubjectRepository.GetAllAsync();
+            return;
         }
 
-        public Task UpdateAsync(SubjectDTO subject)
+        public async Task<SubjectDTO> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var subject = await _unitOfWork.SubjectRepository.GetByIdAsync(id);
+            return subject.AdaptToDTO();
+        }
+
+        public async Task UpdateAsync(SubjectDTO subject)
+        {
+            _unitOfWork.SubjectRepository.Update(subject.AdaptToSubject());
+
+            await _unitOfWork.CommitAsync();
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using BL.Abstraction;
 using BL.DTO.Models;
+using BL.Implementation.Extensions;
+using DAL.Abstraction;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,9 +10,15 @@ namespace BL.Implementation.Services
 {
     class QueueMemberService : IQueueMemberService
     {
-        public Task AddAsync(QueueMemberDTO queueMember)
+        IUnitOfWork _unitOfWork;
+        public QueueMemberService(IUnitOfWork unitOfWork)
         {
-            throw new NotImplementedException();
+            _unitOfWork = unitOfWork;
+        }
+        public async Task AddAsync(QueueMemberDTO queueMember)
+        {
+            await _unitOfWork.QueueMemberRepository.InsertAsync(queueMember.AdaptToQueueMember());
+            await _unitOfWork.CommitAsync();
         }
 
         public void CalculatePriority(QueueMemberDTO queueMember)
@@ -18,19 +26,24 @@ namespace BL.Implementation.Services
             throw new NotImplementedException();
         }
 
-        public Task DeleteByIdAsync(int id)
+        public async Task DeleteByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var queueMember = await _unitOfWork.QueueMemberRepository.GetByIdAsync(id);
+            _unitOfWork.QueueMemberRepository.Delete(queueMember);
+
+            await _unitOfWork.CommitAsync();
         }
 
-        public Task<IEnumerable<QueueMemberDTO>> GetAllAsync()
+        public async Task<IEnumerable<QueueMemberDTO>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var queueMembers = await _unitOfWork.QueueMemberRepository.GetAllAsync();
+            return;
         }
 
-        public Task<QueueMemberDTO> GetByIdAsync(int id)
+        public async Task<QueueMemberDTO> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var queueMember = await _unitOfWork.QueueMemberRepository.GetByIdAsync(id);
+            return consult.AdaptToDTO();
         }
 
         public Task<IEnumerable<QueueMemberDTO>> GetByQueueIdAsync(int id)
@@ -43,9 +56,11 @@ namespace BL.Implementation.Services
             throw new NotImplementedException();
         }
 
-        public Task UpdateAsync(QueueMemberDTO queueMember)
+        public async Task UpdateAsync(QueueMemberDTO queueMember)
         {
-            throw new NotImplementedException();
+            _unitOfWork.QueueMemberRepository.Update(queueMember.AdaptToQueueMember());
+
+            await _unitOfWork.CommitAsync();
         }
     }
 }

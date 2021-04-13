@@ -1,5 +1,8 @@
 ﻿using BL.Abstraction;
 using BL.DTO.Models;
+using BL.Implementation.Extensions;
+using DAL.Abstraction;
+using MapsterMapper;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,29 +11,43 @@ namespace BL.Implementation.Services
 {
     class ConsultationService : IConsultationService
     {
-        public Task AddAsync(ConsultationDTO consultation)
+        IUnitOfWork _unitOfWork;
+        public ConsultationService(IUnitOfWork unitOfWork)
         {
-            throw new NotImplementedException();
+            _unitOfWork = unitOfWork;
         }
 
-        public Task DeleteByIdAsync(int id)
+        public async Task AddAsync(ConsultationDTO consultation)
         {
-            throw new NotImplementedException();
+            await _unitOfWork.ConsultationRepository.InsertAsync(consultation.AdaptToConsultation());
+            await _unitOfWork.CommitAsync();
         }
 
-        public Task<IEnumerable<ConsultationDTO>> GetAllAsync()
+        public async Task DeleteByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var consult = await _unitOfWork.ConsultationRepository.GetByIdAsync(id);
+            _unitOfWork.ConsultationRepository.Delete(consult);
+
+            await _unitOfWork.CommitAsync();
         }
 
-        public Task<ConsultationDTO> GetByIdAsync(int id)
+        public async Task<IEnumerable<ConsultationDTO>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var consultations = await _unitOfWork.ConsultationRepository.GetAllAsync();
+            return ;
         }
 
-        public Task UpdateAsync(ConsultationDTO consultation)
+        public async Task<ConsultationDTO> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var consult = await _unitOfWork.ConsultationRepository.GetByIdAsync(id);
+            return consult.AdaptToDTO();
+        }
+
+        public async Task UpdateAsync(ConsultationDTO consultation)
+        {
+            _unitOfWork.ConsultationRepository.Update(consultation.AdaptToConsultation());
+
+            await _unitOfWork.CommitAsync();
         }
     }
 }
