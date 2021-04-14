@@ -16,11 +16,9 @@ namespace BL.Implementation.Services
     class ConsultationService : IConsultationService
     {
         IUnitOfWork _unitOfWork;
-        ApplicationContext _context;
-        public ConsultationService(IUnitOfWork unitOfWork, ApplicationContext context)
+        public ConsultationService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _context = context;
         }
 
         public async Task AddAsync(ConsultationDTO consultation)
