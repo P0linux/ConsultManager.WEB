@@ -33,7 +33,7 @@ namespace BL.Implementation.Services
 
         public async Task<IEnumerable<ConsultationDTO>> GetAllAsync()
         {
-            var consultations = await _unitOfWork.ConsultationRepository.GetAllAsync();
+            var consultations = _unitOfWork.ConsultationRepository.GetAllAsync();
             return ;
         }
 

@@ -3,6 +3,8 @@ using DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace DAL.Implementation
@@ -24,9 +26,13 @@ namespace DAL.Implementation
             _dbSet.Remove(entity);
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        public async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> filter = null)
         {
-            return await _dbSet.ToListAsync();
+            IQueryable<TEntity> entities = _dbSet;
+
+            if (filter != null) entities = entities.Where(filter);
+
+            return await entities.ToListAsync();
         }
 
         public async Task<TEntity> GetByIdAsync(int id)
