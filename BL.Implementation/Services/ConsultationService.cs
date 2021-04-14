@@ -2,9 +2,13 @@
 using BL.DTO.Models;
 using BL.Implementation.Extensions;
 using DAL.Abstraction;
+using DAL.Implementation;
+using Mapster;
 using MapsterMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BL.Implementation.Services
@@ -12,9 +16,11 @@ namespace BL.Implementation.Services
     class ConsultationService : IConsultationService
     {
         IUnitOfWork _unitOfWork;
-        public ConsultationService(IUnitOfWork unitOfWork)
+        ApplicationContext _context;
+        public ConsultationService(IUnitOfWork unitOfWork, ApplicationContext context)
         {
             _unitOfWork = unitOfWork;
+            _context = context;
         }
 
         public async Task AddAsync(ConsultationDTO consultation)
@@ -33,8 +39,8 @@ namespace BL.Implementation.Services
 
         public async Task<IEnumerable<ConsultationDTO>> GetAllAsync()
         {
-            var consultations = _unitOfWork.ConsultationRepository.GetAllAsync();
-            return ;
+            var consultations = _unitOfWork.ConsultationRepository.GetAllAsync().ProjectToType<ConsultationDTO>();
+            return await consultations.ToListAsync();
         }
 
         public async Task<ConsultationDTO> GetByIdAsync(int id)

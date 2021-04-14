@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Mapster;
 
 namespace DAL.Implementation
 {
@@ -26,13 +27,14 @@ namespace DAL.Implementation
             _dbSet.Remove(entity);
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> filter = null)
+        public IQueryable<TEntity> GetAllAsync(Expression<Func<TEntity, bool>> filter = null)
         {
             IQueryable<TEntity> entities = _dbSet;
 
             if (filter != null) entities = entities.Where(filter);
 
-            return await entities.ToListAsync();
+            return entities;
+            
         }
 
         public async Task<TEntity> GetByIdAsync(int id)
