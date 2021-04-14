@@ -21,11 +21,6 @@ namespace BL.Implementation.Services
             await _unitOfWork.CommitAsync();
         }
 
-        public void CalculatePriority(QueueMemberDTO queueMember)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task DeleteByIdAsync(int id)
         {
             var queueMember = await _unitOfWork.QueueMemberRepository.GetByIdAsync(id);
@@ -43,17 +38,14 @@ namespace BL.Implementation.Services
         public async Task<QueueMemberDTO> GetByIdAsync(int id)
         {
             var queueMember = await _unitOfWork.QueueMemberRepository.GetByIdAsync(id);
-            return consult.AdaptToDTO();
+            return queueMember.AdaptToDTO();
         }
 
-        public Task<IEnumerable<QueueMemberDTO>> GetByQueueIdAsync(int id)
+        public async Task<IEnumerable<QueueMemberDTO>> GetByQueueIdAsync(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public void MarkAbsent(QueueMemberDTO queueMember)
-        {
-            throw new NotImplementedException();
+            var queueMembers = await _unitOfWork.QueueMemberRepository
+                .GetAllAsync(qm => qm.QueueId == id);
+            return ;
         }
 
         public async Task UpdateAsync(QueueMemberDTO queueMember)
@@ -61,6 +53,16 @@ namespace BL.Implementation.Services
             _unitOfWork.QueueMemberRepository.Update(queueMember.AdaptToQueueMember());
 
             await _unitOfWork.CommitAsync();
+        }
+
+        public void CalculatePriority(QueueMemberDTO queueMember)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MarkAbsent(QueueMemberDTO queueMember)
+        {
+            throw new NotImplementedException();
         }
     }
 }

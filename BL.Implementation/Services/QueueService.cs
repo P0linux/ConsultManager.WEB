@@ -37,7 +37,9 @@ namespace BL.Implementation.Services
 
         public async Task<IEnumerable<QueueDTO>> GetByConsultationIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var queues = await _unitOfWork.QueueRepository
+                .GetAllAsync(q => q.ConsultationId == id);
+            return;
         }
 
         public async Task<QueueDTO> GetByIdAsync(int id)
