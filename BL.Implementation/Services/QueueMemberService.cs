@@ -2,8 +2,10 @@
 using BL.DTO.Models;
 using BL.Implementation.Extensions;
 using DAL.Abstraction;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BL.Implementation.Services
@@ -31,8 +33,10 @@ namespace BL.Implementation.Services
 
         public async Task<IEnumerable<QueueMemberDTO>> GetAllAsync()
         {
-            var queueMembers = await _unitOfWork.QueueMemberRepository.GetAllAsync();
-            return;
+            var queueMembers = _unitOfWork.QueueMemberRepository.GetAllAsync()
+                                          .Select(QueueMemberMapper.ProjectToDTO);
+
+            return await queueMembers.ToListAsync();
         }
 
         public async Task<QueueMemberDTO> GetByIdAsync(int id)
@@ -43,9 +47,11 @@ namespace BL.Implementation.Services
 
         public async Task<IEnumerable<QueueMemberDTO>> GetByQueueIdAsync(int id)
         {
-            var queueMembers = await _unitOfWork.QueueMemberRepository
-                .GetAllAsync(qm => qm.QueueId == id);
-            return ;
+            var queueMembers = _unitOfWork.QueueMemberRepository
+                .GetAllAsync(qm => qm.QueueId == id)
+                .Select(QueueMemberMapper.ProjectToDTO);
+
+            return await queueMembers.ToListAsync();
         }
 
         public async Task UpdateAsync(QueueMemberDTO queueMember)

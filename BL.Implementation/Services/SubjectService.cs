@@ -2,8 +2,10 @@
 using BL.DTO.Models;
 using BL.Implementation.Extensions;
 using DAL.Abstraction;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BL.Implementation.Services
@@ -32,8 +34,9 @@ namespace BL.Implementation.Services
 
         public async Task<IEnumerable<SubjectDTO>> GetAllAsync()
         {
-            var subject = await _unitOfWork.SubjectRepository.GetAllAsync();
-            return;
+            var subjects = _unitOfWork.SubjectRepository.GetAllAsync()
+                                           .Select(SubjectMapper.ProjectToDTO);
+            return await subjects.ToListAsync();
         }
 
         public async Task<SubjectDTO> GetByIdAsync(int id)
