@@ -34,7 +34,6 @@ namespace DAL.Implementation
             if (filter != null) entities = entities.Where(filter);
 
             return entities;
-            
         }
 
         public async Task<TEntity> GetByIdAsync(int id)

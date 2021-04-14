@@ -39,8 +39,9 @@ namespace BL.Implementation.Services
 
         public async Task<IEnumerable<ConsultationDTO>> GetAllAsync()
         {
-            var consultations = _unitOfWork.ConsultationRepository.GetAllAsync().ProjectToType<ConsultationDTO>();
-            return await consultations.ToListAsync();
+            var consultations = await _unitOfWork.ConsultationRepository.GetAllAsync();
+            consultations.Select();
+            return consultations;
         }
 
         public async Task<ConsultationDTO> GetByIdAsync(int id)
