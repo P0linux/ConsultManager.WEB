@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BL.DTO.Models
 {
-    class UserLoginModel
+    public class UserLoginModel
     {
         [Required]
         [EmailAddress]

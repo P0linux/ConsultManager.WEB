@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BL.DTO.Models
 {
-    class UserRegisterModel
+    public class UserRegisterModel
     {
         public string FirstName { get; set; }
         public string SecondName { get; set; }
