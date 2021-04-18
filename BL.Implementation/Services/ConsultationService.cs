@@ -2,11 +2,7 @@
 using BL.DTO.Models;
 using BL.Implementation.Extensions;
 using DAL.Abstraction;
-using DAL.Implementation;
-using Mapster;
-using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
