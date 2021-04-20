@@ -1,5 +1,6 @@
 ﻿using DAL.Abstraction;
 using DAL.Entities;
+using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 
 namespace DAL.Implementation
@@ -28,6 +29,10 @@ namespace DAL.Implementation
         IRepository<Subject> _subjectRepository;
         public IRepository<Subject> SubjectRepository =>
             _subjectRepository ??= new Repository<Subject>(_context);
+
+        public SignInManager<User> SignInManager { get; }
+
+        public UserManager<User> UserManager { get; }
 
         public async Task CommitAsync()
         {
