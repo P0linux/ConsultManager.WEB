@@ -6,8 +6,8 @@ namespace BL.Abstraction
 {
     public interface IUserService
     {
-        Task<IdentityResult> Register(UserDTO userRegisterModel);
-        Task<SignInResult> Login(UserDTO userLoginModel);
+        Task<IdentityResult> Register(UserRegisterModel userRegisterModel);
+        Task<SignInResult> Login(UserLoginModel userLoginModel);
         Task SignOut();
     }
 }

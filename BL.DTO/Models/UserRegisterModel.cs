@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -21,5 +22,11 @@ namespace BL.DTO.Models
         [Compare("Password", ErrorMessage = "Passwords are not equal")]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "User Role")]
+        public string UserRole { get; set; }
+
+        public List<IdentityRole> AllRoles { get; set; }
     }
 }

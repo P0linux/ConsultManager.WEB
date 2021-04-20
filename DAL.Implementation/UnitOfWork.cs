@@ -34,6 +34,8 @@ namespace DAL.Implementation
 
         public UserManager<User> UserManager { get; }
 
+        public RoleManager<IdentityRole> RoleManager { get; }
+
         public async Task CommitAsync()
         {
             await _context.SaveChangesAsync();
