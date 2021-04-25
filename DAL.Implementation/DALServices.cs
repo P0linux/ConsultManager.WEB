@@ -10,7 +10,9 @@ namespace DAL.Implementation
     {
         public static IServiceCollection RegisterDALServices(this IServiceCollection services, string connectionString)
         {
-            services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connectionString));
+            //services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<ApplicationContext>(opt => opt.UseInMemoryDatabase("ConsultationManagerDB"));
+
             services.AddIdentityCore<User>(opt =>
             {
                 opt.Password.RequiredLength = 4;
@@ -20,10 +22,11 @@ namespace DAL.Implementation
                 opt.User.RequireUniqueEmail = true;
             })
             .AddRoles<IdentityRole>()
-            .AddEntityFrameworkStores<ApplicationContext>();
+            .AddEntityFrameworkStores<ApplicationContext>()
+            .AddSignInManager();
 
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             return services;
         }
     }

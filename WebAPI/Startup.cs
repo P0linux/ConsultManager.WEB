@@ -3,6 +3,7 @@ using DAL.Implementation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,6 +32,7 @@ namespace WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.RegisterBLServices();
+
             services.RegisterDALServices(""); //Here will be connection string
 
             services.AddControllers();
@@ -38,6 +40,10 @@ namespace WebAPI
             services.Configure<JwtSettings>(Configuration.GetSection("JWTSettings"));
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
+            services
+                .AddAuthentication(IdentityConstants.ApplicationScheme)
+                .AddCookie(IdentityConstants.ApplicationScheme);
 
             services
                 .AddAuthentication(options =>

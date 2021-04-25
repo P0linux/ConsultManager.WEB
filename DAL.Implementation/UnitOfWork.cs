@@ -9,9 +9,11 @@ namespace DAL.Implementation
     {
         ApplicationContext _context;
 
-        public UnitOfWork(ApplicationContext context)
+        public UnitOfWork(ApplicationContext context, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _context = context;
+            UserManager = userManager;
+            SignInManager = signInManager;
         }
 
         IRepository<Consultation> _consultationRepository;
