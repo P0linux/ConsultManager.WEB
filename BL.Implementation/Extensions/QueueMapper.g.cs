@@ -1,5 +1,6 @@
 using System;
 using System.Linq.Expressions;
+using BL.DTO;
 using BL.DTO.Models;
 using DAL.Entities;
 
