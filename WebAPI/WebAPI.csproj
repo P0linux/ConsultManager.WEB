@@ -7,6 +7,7 @@
     <ProjectReference Include="..\DAL.Implementation\DAL.Implementation.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.5" />
     <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.2.220602">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
