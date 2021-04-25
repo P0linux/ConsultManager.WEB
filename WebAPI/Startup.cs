@@ -30,6 +30,8 @@ namespace WebAPI
             services.RegisterDALServices(""); //Here will be connection string
 
             services.AddControllers();
+
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +45,13 @@ namespace WebAPI
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSwagger();
+            
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ConsultationManager");
+            });
 
             app.UseEndpoints(endpoints =>
             {
