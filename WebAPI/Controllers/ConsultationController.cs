@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
@@ -57,7 +56,7 @@ namespace WebAPI.Controllers
             {
                 await _consultationService.AddAsync(consultation);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -75,13 +74,13 @@ namespace WebAPI.Controllers
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Update([FromBody]ConsultationDTO consultation)
+        public async Task<IActionResult> Update([FromBody] ConsultationDTO consultation)
         {
             if (consultation is null)
                 return BadRequest();
 
             await _consultationService.UpdateAsync(consultation);
-            
+
             return Ok();
         }
 
@@ -97,7 +96,7 @@ namespace WebAPI.Controllers
         {
             await _consultationService.DeleteByIdAsync(id);
 
-            return Ok(); 
+            return Ok();
         }
     }
 }
