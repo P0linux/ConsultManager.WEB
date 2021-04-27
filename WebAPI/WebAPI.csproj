@@ -2,6 +2,10 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\BL.Implementation\BL.Implementation.csproj" />
     <ProjectReference Include="..\DAL.Implementation\DAL.Implementation.csproj" />
