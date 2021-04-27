@@ -21,7 +21,16 @@ namespace WebAPI.Controllers
             _userService = userService;
         }
 
+        /// <summary>
+        /// Login.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        /// <responce code="200">Success</responce>
+        /// <responce code="400">Login failed.</responce>
         [HttpPost("Sign In")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Login([FromBody] UserLoginModel model)
         {
             try
@@ -35,7 +44,14 @@ namespace WebAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Register.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        /// <responce code="200">Success</responce>
         [HttpPost("Sign Up")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Register([FromBody] UserRegisterModel model)
         {
             var token = await _userService.Register(model);
