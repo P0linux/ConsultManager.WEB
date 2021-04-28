@@ -65,7 +65,7 @@ namespace ConsultationManager.UnitTests.ControllersTests
 
             //Assert
             actionResult.Should().NotBeNull();
-            actionResult.StatusCode.Equals(201);
+            actionResult.StatusCode.Should().Be(201);
         }
 
         [Test]
@@ -79,7 +79,7 @@ namespace ConsultationManager.UnitTests.ControllersTests
 
             //Assert
             actionResult.Should().NotBeNull();
-            actionResult.StatusCode.Equals(400);
+            actionResult.StatusCode.Should().Be(400);
         }
 
         [Test]
@@ -93,7 +93,7 @@ namespace ConsultationManager.UnitTests.ControllersTests
 
             //Assert
             actionResult.Should().NotBeNull();
-            actionResult.StatusCode.Equals(200);
+            actionResult.StatusCode.Should().Be(200);
         }
 
         [Test]
@@ -107,7 +107,7 @@ namespace ConsultationManager.UnitTests.ControllersTests
 
             //Assert
             actionResult.Should().NotBeNull();
-            actionResult.StatusCode.Equals(400);
+            actionResult.StatusCode.Should().Be(400);
         }
 
         [Test]
