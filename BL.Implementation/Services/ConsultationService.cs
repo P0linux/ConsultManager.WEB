@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BL.Implementation.Services
 {
-    class ConsultationService : IConsultationService
+    public class ConsultationService : IConsultationService
     {
         IUnitOfWork _unitOfWork;
         public ConsultationService(IUnitOfWork unitOfWork)

@@ -3,11 +3,9 @@ using BL.DTO.Models;
 using BL.Implementation.Extensions;
 using BL.Implementation.Services;
 using DAL.Abstraction;
-using DAL.Entities;
 using DAL.Implementation;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
-using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -18,9 +16,9 @@ using System.Threading.Tasks;
 namespace ConsultationManager.UnitTests.ServicesTests
 {
     [TestFixture]
-    class SubjectServiceTest
+    public class QueueServiceTests
     {
-        private ISubjectService _subjectService;
+        private IQueueService _queueService;
         private ApplicationContext _context;
         private IUnitOfWork _unitOfWork;
 
@@ -30,17 +28,17 @@ namespace ConsultationManager.UnitTests.ServicesTests
             _context = new ApplicationContext(UnitTestsHelper.GetUnitTestDbOptions());
 
             _unitOfWork = new UnitOfWork(_context, null, null);
-            _subjectService = new SubjectService(_unitOfWork);
+            _queueService = new QueueService(_unitOfWork);
         }
 
         [Test]
-        public async Task GetAll_ReturnsAllEntities() 
+        public async Task GetAll_ReturnsAllEntities()
         {
             // Arrange
-            var expectedCount = await _context.Subjects.CountAsync();
+            var expectedCount = await _context.Queues.CountAsync();
 
             // Act
-            var resultCount = _subjectService.GetAllAsync();
+            var resultCount = _queueService.GetAllAsync();
 
             // Assert
 
@@ -51,13 +49,13 @@ namespace ConsultationManager.UnitTests.ServicesTests
         public async Task GetById_EntityExists_ReturnsEntity()
         {
             // Arrange
-            var expected = await _context.Subjects.FirstOrDefaultAsync(s => s.Id == 1);
+            var expected = await _context.Queues.FirstOrDefaultAsync(s => s.Id == 1);
 
             // Act
-            var result = await _subjectService.GetByIdAsync(1);
+            var result = await _queueService.GetByIdAsync(1);
 
             // Assert
-            result.Should().BeOfType<SubjectDTO>();
+            result.Should().BeOfType<QueueDTO>();
             result.Should().BeEquivalentTo(expected.AdaptToDTO());
         }
 
@@ -65,7 +63,7 @@ namespace ConsultationManager.UnitTests.ServicesTests
         public async Task GetById_EntityNotExists_ReturnsNull()
         {
             // Act
-            var result = await _subjectService.GetByIdAsync(10);
+            var result = await _queueService.GetByIdAsync(10);
 
             // Assert
             result.Should().BeNull();
@@ -75,11 +73,11 @@ namespace ConsultationManager.UnitTests.ServicesTests
         public async Task AddAsync_AddEntity()
         {
             // Arrange
-            var expectedCount = await _context.Subjects.CountAsync();
+            var expectedCount = await _context.Queues.CountAsync();
 
             // Act
-            await _subjectService.AddAsync(new SubjectDTO { Id = 3, Name = "Subject3" });
-            var resultCount = await _context.Subjects.CountAsync();
+            await _queueService.AddAsync(new QueueDTO { Id = 3, Priority = 1 });
+            var resultCount = await _context.Queues.CountAsync();
 
             // Assert
             resultCount.Should().Be(expectedCount + 1);
@@ -89,11 +87,11 @@ namespace ConsultationManager.UnitTests.ServicesTests
         public async Task DeleteAsync_DeletesEntity()
         {
             // Arrange
-            var expectedCount = await _context.Subjects.CountAsync();
+            var expectedCount = await _context.Queues.CountAsync();
 
             // Act
-            await _subjectService.DeleteByIdAsync(1);
-            var resultCount = await _context.Subjects.CountAsync();
+            await _queueService.DeleteByIdAsync(1);
+            var resultCount = await _context.Queues.CountAsync();
 
             // Assert
             resultCount.Should().Be(expectedCount - 1);
@@ -103,15 +101,15 @@ namespace ConsultationManager.UnitTests.ServicesTests
         public async Task UpdateAsync_UpdatesEntity()
         {
             // Arrange
-            var expected = await _context.Subjects.AsNoTracking().FirstOrDefaultAsync(s => s.Id == 1);
+            var expected = await _context.Queues.AsNoTracking().FirstOrDefaultAsync(s => s.Id == 1);
 
             // Act
-            await _subjectService.UpdateAsync(new SubjectDTO { Id = 1, Name = "AnotherName" });
-            var result = await _context.Subjects.AsNoTracking().FirstOrDefaultAsync(s => s.Id == 1);
+            await _queueService.UpdateAsync(new QueueDTO { Id = 1, Priority = 2 });
+            var result = await _context.Queues.AsNoTracking().FirstOrDefaultAsync(s => s.Id == 1);
 
             // Assert
             expected.Id.Should().Be(result.Id);
-            expected.Name.Should().NotBe(result.Name);
+            expected.Priority.Should().NotBe(result.Priority);
         }
     }
 }

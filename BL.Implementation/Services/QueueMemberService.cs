@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BL.Implementation.Services
 {
-    class QueueMemberService : IQueueMemberService
+    public class QueueMemberService : IQueueMemberService
     {
         IUnitOfWork _unitOfWork;
         public QueueMemberService(IUnitOfWork unitOfWork)
