@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Implementation
 {
-    class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         ApplicationContext _context;
 

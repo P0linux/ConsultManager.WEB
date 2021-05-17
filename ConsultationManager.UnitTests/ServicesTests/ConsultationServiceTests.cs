@@ -3,11 +3,9 @@ using BL.DTO.Models;
 using BL.Implementation.Extensions;
 using BL.Implementation.Services;
 using DAL.Abstraction;
-using DAL.Entities;
 using DAL.Implementation;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
-using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -18,9 +16,9 @@ using System.Threading.Tasks;
 namespace ConsultationManager.UnitTests.ServicesTests
 {
     [TestFixture]
-    class SubjectServiceTest
+    public class ConsultationServiceTests
     {
-        private ISubjectService _subjectService;
+        private IConsultationService _consultationService;
         private ApplicationContext _context;
         private IUnitOfWork _unitOfWork;
 
@@ -30,17 +28,17 @@ namespace ConsultationManager.UnitTests.ServicesTests
             _context = new ApplicationContext(UnitTestsHelper.GetUnitTestDbOptions());
 
             _unitOfWork = new UnitOfWork(_context, null, null);
-            _subjectService = new SubjectService(_unitOfWork);
+            _consultationService = new ConsultationService(_unitOfWork);
         }
 
         [Test]
-        public async Task GetAll_ReturnsAllEntities() 
+        public async Task GetAll_ReturnsAllEntities()
         {
             // Arrange
-            var expectedCount = await _context.Subjects.CountAsync();
+            var expectedCount = await _context.Consultations.CountAsync();
 
             // Act
-            var resultCount = _subjectService.GetAllAsync();
+            var resultCount = _consultationService.GetAllAsync();
 
             // Assert
 
@@ -51,13 +49,13 @@ namespace ConsultationManager.UnitTests.ServicesTests
         public async Task GetById_EntityExists_ReturnsEntity()
         {
             // Arrange
-            var expected = await _context.Subjects.FirstOrDefaultAsync(s => s.Id == 1);
+            var expected = await _context.Consultations.FirstOrDefaultAsync(s => s.Id == 1);
 
             // Act
-            var result = await _subjectService.GetByIdAsync(1);
+            var result = await _consultationService.GetByIdAsync(1);
 
             // Assert
-            result.Should().BeOfType<SubjectDTO>();
+            result.Should().BeOfType<ConsultationDTO>();
             result.Should().BeEquivalentTo(expected.AdaptToDTO());
         }
 
@@ -65,7 +63,7 @@ namespace ConsultationManager.UnitTests.ServicesTests
         public async Task GetById_EntityNotExists_ReturnsNull()
         {
             // Act
-            var result = await _subjectService.GetByIdAsync(10);
+            var result = await _consultationService.GetByIdAsync(10);
 
             // Assert
             result.Should().BeNull();
@@ -75,11 +73,11 @@ namespace ConsultationManager.UnitTests.ServicesTests
         public async Task AddAsync_AddEntity()
         {
             // Arrange
-            var expectedCount = await _context.Subjects.CountAsync();
+            var expectedCount = await _context.Consultations.CountAsync();
 
             // Act
-            await _subjectService.AddAsync(new SubjectDTO { Id = 3, Name = "Subject3" });
-            var resultCount = await _context.Subjects.CountAsync();
+            await _consultationService.AddAsync(new ConsultationDTO { Id = 3, SubjectId = 1 });
+            var resultCount = await _context.Consultations.CountAsync();
 
             // Assert
             resultCount.Should().Be(expectedCount + 1);
@@ -89,11 +87,11 @@ namespace ConsultationManager.UnitTests.ServicesTests
         public async Task DeleteAsync_DeletesEntity()
         {
             // Arrange
-            var expectedCount = await _context.Subjects.CountAsync();
+            var expectedCount = await _context.Consultations.CountAsync();
 
             // Act
-            await _subjectService.DeleteByIdAsync(1);
-            var resultCount = await _context.Subjects.CountAsync();
+            await _consultationService.DeleteByIdAsync(1);
+            var resultCount = await _context.Consultations.CountAsync();
 
             // Assert
             resultCount.Should().Be(expectedCount - 1);
@@ -103,15 +101,15 @@ namespace ConsultationManager.UnitTests.ServicesTests
         public async Task UpdateAsync_UpdatesEntity()
         {
             // Arrange
-            var expected = await _context.Subjects.AsNoTracking().FirstOrDefaultAsync(s => s.Id == 1);
+            var expected = await _context.Consultations.AsNoTracking().FirstOrDefaultAsync(s => s.Id == 1);
 
             // Act
-            await _subjectService.UpdateAsync(new SubjectDTO { Id = 1, Name = "AnotherName" });
-            var result = await _context.Subjects.AsNoTracking().FirstOrDefaultAsync(s => s.Id == 1);
+            await _consultationService.UpdateAsync(new ConsultationDTO { Id = 1, SubjectId = 2 });
+            var result = await _context.Consultations.AsNoTracking().FirstOrDefaultAsync(s => s.Id == 1);
 
             // Assert
             expected.Id.Should().Be(result.Id);
-            expected.Name.Should().NotBe(result.Name);
+            expected.SubjectId.Should().NotBe(result.SubjectId);
         }
     }
 }
