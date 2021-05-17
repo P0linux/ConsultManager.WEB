@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BL.Implementation.Services
 {
-    class SubjectService : ISubjectService
+    public class SubjectService : ISubjectService
     {
         IUnitOfWork _unitOfWork;
         public SubjectService(IUnitOfWork unitOfWork)
