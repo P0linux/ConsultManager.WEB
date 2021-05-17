@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Implementation
 {
-    class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
     {
         ApplicationContext _context;
         DbSet<TEntity> _dbSet;

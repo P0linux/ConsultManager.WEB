@@ -1,4 +1,5 @@
 ﻿using BL.Abstraction;
+using BL.Implementation.Services;
 using DAL.Abstraction;
 using DAL.Entities;
 using DAL.Implementation;
@@ -17,16 +18,17 @@ namespace ConsultationManager.UnitTests.ServicesTests
     class SubjectServiceTest
     {
         private ISubjectService _subjectService;
-        private ApplicationContext _applicationContext;
+        private ApplicationContext _context;
         private IRepository<Subject> _subjectRepository;
 
         [SetUp]
         public void SetUp()
         {
-            var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>()
-                .UseInMemoryDatabase("ConsultationManagerDb");
-
-
+            _context = new ApplicationContext(UnitTestsHelper.GetUnitTestDbOptions());
+            _subjectRepository = new Repository<Subject>(_context);
         }
+
+        [Test]
+        public async Task GetAll_
     }
 }
