@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BL.Implementation.Services
 {
-    class QueueService : IQueueService
+    public class QueueService : IQueueService
     {
         IUnitOfWork _unitOfWork;
         public QueueService(IUnitOfWork unitOfWork)
