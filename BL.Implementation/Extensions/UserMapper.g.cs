@@ -13,7 +13,8 @@ namespace BL.Implementation.Extensions
             {
                 Id = p1.Id,
                 FirstName = p1.FirstName,
-                SecondName = p1.SecondName
+                SecondName = p1.SecondName,
+                Role = p1.Role,
             };
         }
         public static User AdaptTo(this UserDTO p2, User p3)
@@ -27,6 +28,7 @@ namespace BL.Implementation.Extensions
             result.Id = p2.Id;
             result.FirstName = p2.FirstName;
             result.SecondName = p2.SecondName;
+            result.Role = p2.Role;
             return result;
             
         }
@@ -34,7 +36,8 @@ namespace BL.Implementation.Extensions
         {
             Id = p4.Id,
             FirstName = p4.FirstName,
-            SecondName = p4.SecondName
+            SecondName = p4.SecondName,
+            Role = p4.Role
         };
 
         public static UserDTO AdaptToDTO(this User p5)
@@ -43,7 +46,8 @@ namespace BL.Implementation.Extensions
             {
                 Id = p5.Id,
                 FirstName = p5.FirstName,
-                SecondName = p5.SecondName
+                SecondName = p5.SecondName, 
+                Role = p5.Role
             };
         }
         public static UserDTO AdaptTo(this User p6, UserDTO p7)
@@ -57,6 +61,7 @@ namespace BL.Implementation.Extensions
             result.Id = p6.Id;
             result.FirstName = p6.FirstName;
             result.SecondName = p6.SecondName;
+            result.Role = p6.Role;
             return result;
             
         }
@@ -64,7 +69,8 @@ namespace BL.Implementation.Extensions
         {
             Id = p8.Id,
             FirstName = p8.FirstName,
-            SecondName = p8.SecondName
+            SecondName = p8.SecondName, 
+            Role = p8.Role
         };
 
         public static User AdaptToUser(this UserRegisterModel p9)
@@ -74,7 +80,8 @@ namespace BL.Implementation.Extensions
                 FirstName = p9.FirstName,
                 SecondName = p9.SecondName,
                 UserName = p9.Email,
-                Email = p9.Email
+                Email = p9.Email,
+                Role = p9.UserRole
             };
         }
     }

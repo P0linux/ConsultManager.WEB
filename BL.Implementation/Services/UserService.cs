@@ -44,10 +44,10 @@ namespace BL.Implementation.Services
         {
             var user = userRegisterModel.AdaptToUser();
             var res = await _unitOfWork.UserManager.CreateAsync(user, userRegisterModel.Password);
-            //await _unitOfWork.UserManager.AddToRoleAsync(user, userRegisterModel.UserRole);
 
             if (res.Succeeded)
             {
+                await _unitOfWork.UserManager.AddToRoleAsync(user, userRegisterModel.UserRole);
                 return GenerateJwtToken(userRegisterModel.Email, user.AdaptToDTO());
             }
 
@@ -65,7 +65,8 @@ namespace BL.Implementation.Services
             {
                 new Claim(JwtRegisteredClaimNames.Sub, email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.NameIdentifier, user.Id)
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
+                new Claim(ClaimTypes.Role, user.Role)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.SecretKey));

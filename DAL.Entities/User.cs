@@ -9,5 +9,6 @@ namespace DAL.Entities
         public string FirstName { get; set; }
         [DataMember]
         public string SecondName { get; set; }
+        public string Role { get; set; }
     }
 }
