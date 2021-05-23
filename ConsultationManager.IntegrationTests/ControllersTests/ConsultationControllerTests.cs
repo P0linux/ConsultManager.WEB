@@ -6,20 +6,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ConsultationManager.IntegrationTests.ControllersTests
 {
     [TestFixture]
-    public class SubjectControllerTests
+    public class ConsultationControllerTests
     {
         private HttpClient _httpClient;
         private CustomWebApplicationFactory _factory;
-        private const string requestURI = "api/subject/";
+        private const string requestURI = "api/consultation/";
 
-        public SubjectControllerTests()
+        public ConsultationControllerTests()
         {
             _factory = new CustomWebApplicationFactory();
         }
@@ -36,11 +35,11 @@ namespace ConsultationManager.IntegrationTests.ControllersTests
             // Act
             var responce = await _httpClient.GetAsync(requestURI);
             var responceString = await responce.Content.ReadAsStringAsync();
-            var entities = JsonConvert.DeserializeObject<IEnumerable<SubjectDTO>>(responceString);
+            var entities = JsonConvert.DeserializeObject<IEnumerable<ConsultationDTO>>(responceString);
 
             //Assert
             responce.EnsureSuccessStatusCode();
-            entities.Should().HaveCount(2);
+            entities.Should().HaveCount(1);
         }
 
         [Test]
@@ -49,36 +48,12 @@ namespace ConsultationManager.IntegrationTests.ControllersTests
             // Act
             var responce = await _httpClient.GetAsync(requestURI + 1);
             var responceString = await responce.Content.ReadAsStringAsync();
-            var entity = JsonConvert.DeserializeObject<SubjectDTO>(responceString);
+            var entity = JsonConvert.DeserializeObject<ConsultationDTO>(responceString);
 
             //Assert
             responce.EnsureSuccessStatusCode();
             entity.Id.Should().Be(1);
-            entity.Name.Should().Be("Subject1");
-        }
-
-        [Test]
-        public async Task Add_WhenModelIsValid_ReturnsSuccess()
-        {
-           //Arrange
-           var postRequest = new HttpRequestMessage(HttpMethod.Post, "api/subject/Add/");
-
-            var formModel = new Dictionary<string, string>
-            {
-                {"Name", "Subject3" },
-                {"Id", "3"},
-            };
-
-            postRequest.Content = new FormUrlEncodedContent(formModel);
-
-            //Act
-            var responce = await _httpClient.SendAsync(postRequest);
-            var responceString = await responce.Content.ReadAsStringAsync();
-
-            //Assert
-            responce.EnsureSuccessStatusCode();
-            responceString.Should().Contain("Subject3");
-
+            entity.Date.Should().Be(new DateTime(2021, 06, 12));
         }
     }
 }

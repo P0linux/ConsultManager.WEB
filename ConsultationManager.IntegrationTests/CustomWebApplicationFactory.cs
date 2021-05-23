@@ -59,7 +59,7 @@ namespace ConsultationManager.IntegrationTests
 
             context.Queues.Add(new Queue { Id = 1, ConsultationId = 1, IssueCategory = "Code", Priority = 1 });
 
-            context.QueueMembers.Add(new QueueMember { Id = 1, QueueId = 1, StudentId = 1, Priority = 1, IsAbsent = false, TimeInterval = TimeSpan.FromHours(1) });
+            context.QueueMembers.Add(new QueueMember { Id = 1, QueueId = 1, StudentId = 1, Priority = 1, IsAbsent = false, TimeInterval = 20 });
 
             context.SaveChanges();
         }
