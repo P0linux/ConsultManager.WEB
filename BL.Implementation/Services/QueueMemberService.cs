@@ -91,10 +91,5 @@ namespace BL.Implementation.Services
 
             return newQueueMembers;
         }
-
-        public void MarkAbsent(QueueMemberDTO queueMember)
-        {
-            
-        }
     }
 }
