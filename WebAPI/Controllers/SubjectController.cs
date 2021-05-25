@@ -1,10 +1,10 @@
 ﻿using BL.Abstraction;
 using BL.DTO.Models;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
@@ -46,7 +46,7 @@ namespace WebAPI.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Add([FromBody] SubjectDTO subject)
+        public async Task<IActionResult> Add([FromBody]SubjectDTO subject)
         {
             try
             {
