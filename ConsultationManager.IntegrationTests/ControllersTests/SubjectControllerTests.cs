@@ -81,5 +81,64 @@ namespace ConsultationManager.IntegrationTests.ControllersTests
             responce.EnsureSuccessStatusCode();
             responceString.Should().Contain("Subject3");
         }
+
+        [Test]
+        public async Task Add_WhenModelIsNotValid_ReturnBadRequest()
+        {
+            //Arrange
+            var json = JsonConvert.SerializeObject(null);
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+            //Act
+            var responce = await _httpClient.PostAsync("api/subject", data);
+
+
+            //Assert
+            responce.StatusCode.Should().Be(400);
+        }
+
+        [Test]
+        public async Task Update_WhenModelIsValid_ReturnSuccess()
+        {
+            //Arrange
+            var updatedModel = new SubjectDTO
+            {
+                Id = 1,
+                Name = "NewSubject1",
+            };
+
+            var json = JsonConvert.SerializeObject(updatedModel);
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+            //Act
+            var responce = await _httpClient.PutAsync("api/subject", data);
+
+            //Assert
+            responce.EnsureSuccessStatusCode();
+        }
+
+        [Test]
+        public async Task Update_WhenModelIsNotValid_ReturnBadRequest()
+        {
+            //Arrange
+            var json = JsonConvert.SerializeObject(null);
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+            //Act
+            var responce = await _httpClient.PutAsync("api/subject", data);
+
+            //Assert
+            responce.StatusCode.Should().Be(400);
+        }
+
+        [Test]
+        public async Task Delete_WhenCalled_ReturnSuccess()
+        {
+            //Act
+            var responce = await _httpClient.DeleteAsync(requestURI + 1);
+
+            //Assert
+            responce.EnsureSuccessStatusCode();
+        }
     }
 }
