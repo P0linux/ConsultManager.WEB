@@ -4,6 +4,11 @@ using Newtonsoft.Json;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Net.Http;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -70,6 +75,7 @@ namespace ConsultationManager.IntegrationTests.ControllersTests
             //Act
             var responce = await _httpClient.PostAsync("api/subject", data); 
             var responceString = responce.Content.ReadAsStringAsync().Result;
+
 
             //Assert
             responce.EnsureSuccessStatusCode();
