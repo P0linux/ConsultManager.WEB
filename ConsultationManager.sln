@@ -25,7 +25,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BL.DTO", "BL.DTO\BL.DTO.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsultationManager.UnitTests", "ConsultationManager.UnitTests\ConsultationManager.UnitTests.csproj", "{CC3B0184-C16E-45B4-83F3-D2B4E5B070E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsultationManager.IntegrationTests", "ConsultationManager.IntegrationTests\ConsultationManager.IntegrationTests.csproj", "{6825DFE0-C121-47A9-93C0-8A29D551F1BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsultationManager.IntegrationTests", "ConsultationManager.IntegrationTests\ConsultationManager.IntegrationTests.csproj", "{6825DFE0-C121-47A9-93C0-8A29D551F1BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMVC", "WebMVC\WebMVC.csproj", "{FF5AC7D6-1701-421A-BA43-4DBDCF73AB05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{6825DFE0-C121-47A9-93C0-8A29D551F1BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6825DFE0-C121-47A9-93C0-8A29D551F1BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6825DFE0-C121-47A9-93C0-8A29D551F1BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF5AC7D6-1701-421A-BA43-4DBDCF73AB05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF5AC7D6-1701-421A-BA43-4DBDCF73AB05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF5AC7D6-1701-421A-BA43-4DBDCF73AB05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF5AC7D6-1701-421A-BA43-4DBDCF73AB05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

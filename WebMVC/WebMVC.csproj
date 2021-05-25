@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Core" Version="5.0.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BL.Abstraction\BL.Abstraction.csproj" />
+    <ProjectReference Include="..\BL.DTO\BL.DTO.csproj" />
+    <ProjectReference Include="..\BL.Implementation\BL.Implementation.csproj" />
+    <ProjectReference Include="..\DAL.Abstraction\DAL.Abstraction.csproj" />
+    <ProjectReference Include="..\DAL.Entities\DAL.Entities.csproj" />
+    <ProjectReference Include="..\DAL.Implementation\DAL.Implementation.csproj" />
+  </ItemGroup>
+
+</Project>
