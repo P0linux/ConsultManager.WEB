@@ -2,6 +2,8 @@
 using FluentAssertions;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using System.Collections.Generic;
+using System.Net.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,25 +62,24 @@ namespace ConsultationManager.IntegrationTests.ControllersTests
         [Test]
         public async Task Add_WhenModelIsValid_ReturnsSuccess()
         {
-           //Arrange
-           var postRequest = new HttpRequestMessage(HttpMethod.Post, "api/subject/Add/");
-
-            var formModel = new Dictionary<string, string>
+            //Arrange
+            var formModel = new SubjectDTO
             {
-                {"Name", "Subject3" },
-                {"Id", "3"},
+                Id = 3,
+                Name = "Subject3",
             };
 
-            postRequest.Content = new FormUrlEncodedContent(formModel);
+            var json = JsonConvert.SerializeObject(formModel);
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
 
             //Act
-            var responce = await _httpClient.SendAsync(postRequest);
-            var responceString = await responce.Content.ReadAsStringAsync();
+            var responce = await _httpClient.PostAsync("api/subject", data); 
+            var responceString = responce.Content.ReadAsStringAsync().Result;
+
 
             //Assert
             responce.EnsureSuccessStatusCode();
             responceString.Should().Contain("Subject3");
-
         }
     }
 }
