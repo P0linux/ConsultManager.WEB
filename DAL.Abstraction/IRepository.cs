@@ -13,5 +13,6 @@ namespace DAL.Abstraction
         Task InsertAsync(TEntity entity);
         void Update(TEntity entity);
         void Delete(TEntity entity);
+        bool Exists(int id);
     }
 }

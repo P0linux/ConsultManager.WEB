@@ -49,5 +49,10 @@ namespace DAL.Implementation
             _dbSet.Attach(entity);
             _context.Entry(entity).State = EntityState.Modified;
         }
+
+        public bool Exists(int id)
+        {
+            return _dbSet.Any(e => e.Id == id);
+        }
     }
 }
