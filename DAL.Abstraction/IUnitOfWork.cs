@@ -11,7 +11,7 @@ namespace DAL.Abstraction
         RoleManager<IdentityRole> RoleManager { get; }
         IConsultationRepository ConsultationRepository { get; }
         IQueueRepository QueueRepository { get; }
-        IRepository<QueueMember> QueueMemberRepository { get; }
+        IQueueMemberRepository QueueMemberRepository { get; }
         IRepository<Subject> SubjectRepository { get; }
 
         Task CommitAsync();

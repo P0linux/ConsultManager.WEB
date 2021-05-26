@@ -15,6 +15,7 @@ namespace BL.Implementation.Extensions
                 TimeInterval = p1.TimeInterval,
                 IsAbsent = p1.IsAbsent,
                 QueueId = p1.QueueId,
+                Queue = p1.Queue.AdaptToQueue(),
                 StudentId = p1.StudentId,
                 Id = p1.Id
             };
@@ -31,6 +32,7 @@ namespace BL.Implementation.Extensions
             result.TimeInterval = p2.TimeInterval;
             result.IsAbsent = p2.IsAbsent;
             result.QueueId = p2.QueueId;
+            result.Queue = p2.Queue.AdaptToQueue();
             result.StudentId = p2.StudentId;
             result.Id = p2.Id;
             return result;
@@ -42,6 +44,7 @@ namespace BL.Implementation.Extensions
             TimeInterval = p4.TimeInterval,
             IsAbsent = p4.IsAbsent,
             QueueId = p4.QueueId,
+            Queue = p4.Queue.AdaptToQueue(),
             StudentId = p4.StudentId,
             Id = p4.Id
         };
@@ -53,6 +56,7 @@ namespace BL.Implementation.Extensions
                 TimeInterval = p5.TimeInterval,
                 IsAbsent = p5.IsAbsent,
                 QueueId = p5.QueueId,
+                Queue = p5.Queue.AdaptToDTO(),
                 StudentId = p5.StudentId,
                 Id = p5.Id
             };
@@ -69,6 +73,7 @@ namespace BL.Implementation.Extensions
             result.TimeInterval = p6.TimeInterval;
             result.IsAbsent = p6.IsAbsent;
             result.QueueId = p6.QueueId;
+            result.Queue = p6.Queue.AdaptToDTO();
             result.StudentId = p6.StudentId;
             result.Id = p6.Id;
             return result;
@@ -80,6 +85,7 @@ namespace BL.Implementation.Extensions
             TimeInterval = p8.TimeInterval,
             IsAbsent = p8.IsAbsent,
             QueueId = p8.QueueId,
+            Queue = p8.Queue.AdaptToDTO(),
             StudentId = p8.StudentId,
             Id = p8.Id
         };

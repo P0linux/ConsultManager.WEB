@@ -25,9 +25,9 @@ namespace DAL.Implementation
         public IQueueRepository QueueRepository =>
             _queueRepository ??= new QueueRepository(_context);
 
-        IRepository<QueueMember> _queueMemberRepository;
-        public IRepository<QueueMember> QueueMemberRepository =>
-            _queueMemberRepository ??= new Repository<QueueMember>(_context);
+        IQueueMemberRepository _queueMemberRepository;
+        public IQueueMemberRepository QueueMemberRepository =>
+            _queueMemberRepository ??= new QueueMemberRepository(_context);
 
         IRepository<Subject> _subjectRepository;
         public IRepository<Subject> SubjectRepository =>

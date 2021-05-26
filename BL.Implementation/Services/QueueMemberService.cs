@@ -3,7 +3,6 @@ using BL.DTO.Models;
 using BL.Implementation.Extensions;
 using DAL.Abstraction;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,7 +35,7 @@ namespace BL.Implementation.Services
             var queueMembers = _unitOfWork.QueueMemberRepository.GetAllAsync()
                                           .Select(QueueMemberMapper.ProjectToDTO);
 
-            return await CalculateAllPriorities(queueMembers).AsQueryable().ToListAsync();
+            return await Task.FromResult(CalculateAllPriorities(queueMembers).ToList());
         }
 
         public async Task<QueueMemberDTO> GetByIdAsync(int id)
