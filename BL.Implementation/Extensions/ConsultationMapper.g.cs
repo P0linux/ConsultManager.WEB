@@ -13,6 +13,7 @@ namespace BL.Implementation.Extensions
             {
                 Date = p1.Date,
                 SubjectId = p1.SubjectId,
+                Subject = p1.Subject.AdaptToSubject(),
                 LecturerId = p1.LecturerId,
                 Id = p1.Id
             };
@@ -27,6 +28,7 @@ namespace BL.Implementation.Extensions
             
             result.Date = p2.Date;
             result.SubjectId = p2.SubjectId;
+            result.Subject = p2.Subject.AdaptToSubject();
             result.LecturerId = p2.LecturerId;
             result.Id = p2.Id;
             return result;
@@ -36,6 +38,7 @@ namespace BL.Implementation.Extensions
         {
             Date = p4.Date,
             SubjectId = p4.SubjectId,
+            Subject = p4.Subject.AdaptToSubject(),
             LecturerId = p4.LecturerId,
             Id = p4.Id
         };
@@ -45,6 +48,7 @@ namespace BL.Implementation.Extensions
             {
                 Date = p5.Date,
                 SubjectId = p5.SubjectId,
+                Subject = p5.Subject.AdaptToDTO(),
                 LecturerId = p5.LecturerId,
                 Id = p5.Id
             };
@@ -59,6 +63,7 @@ namespace BL.Implementation.Extensions
             
             result.Date = p6.Date;
             result.SubjectId = p6.SubjectId;
+            result.Subject = p6.Subject.AdaptToDTO();
             result.LecturerId = p6.LecturerId;
             result.Id = p6.Id;
             return result;
@@ -68,6 +73,7 @@ namespace BL.Implementation.Extensions
         {
             Date = p8.Date,
             SubjectId = p8.SubjectId,
+            Subject = p8.Subject.AdaptToDTO(),
             LecturerId = p8.LecturerId,
             Id = p8.Id
         };

@@ -17,9 +17,9 @@ namespace DAL.Implementation
             SignInManager = signInManager;
         }
 
-        IRepository<Consultation> _consultationRepository;
-        public IRepository<Consultation> ConsultationRepository =>
-            _consultationRepository ??= new Repository<Consultation>(_context);
+        IConsultationRepository _consultationRepository;
+        public IConsultationRepository ConsultationRepository =>
+            _consultationRepository ??= new ConsultationRepository(_context);
 
         IQueueRepository _queueRepository;
         public IQueueRepository QueueRepository =>
