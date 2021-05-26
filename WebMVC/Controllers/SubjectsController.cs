@@ -7,34 +7,35 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DAL.Entities;
 using DAL.Implementation;
+using BL.Abstraction;
+using BL.DTO.Models;
 
 namespace WebMVC.Controllers
 {
     public class SubjectsController : Controller
     {
-        private readonly ApplicationContext _context;
+        private readonly ISubjectService _service;
 
-        public SubjectsController(ApplicationContext context)
+        public SubjectsController(ISubjectService service)
         {
-            _context = context;
+            _service = service;
         }
 
         // GET: Subjects
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Subjects.ToListAsync());
+            return View(await _service.GetAllAsync());
         }
 
         // GET: Subjects/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
+            if (id < 0)
             {
                 return NotFound();
             }
 
-            var subject = await _context.Subjects
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var subject = await _service.GetByIdAsync(id);
             if (subject == null)
             {
                 return NotFound();
@@ -52,26 +53,25 @@ namespace WebMVC.Controllers
         // POST: Subjects/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Id")] Subject subject)
+        public async Task<IActionResult> Create([Bind("Name,Id")] SubjectDTO subject)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(subject);
-                await _context.SaveChangesAsync();
+                await _service.AddAsync(subject);
                 return RedirectToAction(nameof(Index));
             }
             return View(subject);
         }
 
         // GET: Subjects/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
+            if (id < 0)
             {
                 return NotFound();
             }
 
-            var subject = await _context.Subjects.FindAsync(id);
+            var subject = await _service.GetByIdAsync(id);
             if (subject == null)
             {
                 return NotFound();
@@ -82,7 +82,7 @@ namespace WebMVC.Controllers
         // POST: Subjects/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Name,Id")] Subject subject)
+        public async Task<IActionResult> Edit(int id, [Bind("Name,Id")] SubjectDTO subject)
         {
             if (id != subject.Id)
             {
@@ -93,12 +93,11 @@ namespace WebMVC.Controllers
             {
                 try
                 {
-                    _context.Update(subject);
-                    await _context.SaveChangesAsync();
+                    await _service.UpdateAsync(subject);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SubjectExists(subject.Id))
+                    if (!_service.SubjectExists(subject.Id))
                     {
                         return NotFound();
                     }
@@ -113,15 +112,14 @@ namespace WebMVC.Controllers
         }
 
         // GET: Subjects/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
+            if (id < 0)
             {
                 return NotFound();
             }
 
-            var subject = await _context.Subjects
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var subject = await _service.GetByIdAsync(id);
             if (subject == null)
             {
                 return NotFound();
@@ -135,15 +133,8 @@ namespace WebMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var subject = await _context.Subjects.FindAsync(id);
-            _context.Subjects.Remove(subject);
-            await _context.SaveChangesAsync();
+            await _service.DeleteByIdAsync(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool SubjectExists(int id)
-        {
-            return _context.Subjects.Any(e => e.Id == id);
         }
     }
 }
