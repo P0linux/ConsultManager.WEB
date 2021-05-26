@@ -15,12 +15,12 @@ namespace WebMVC.Controllers
     public class QueueMembersController : Controller
     {
         private readonly IQueueMemberService _service;
-        ApplicationContext _context;
+        private readonly IQueueService _queueService;
 
-        public QueueMembersController(IQueueMemberService service, ApplicationContext context)
+        public QueueMembersController(IQueueMemberService service, IQueueService queueService)
         {
+            _queueService = queueService;
             _service = service;
-            _context = context;
         }
 
         // GET: QueueMembers
@@ -48,9 +48,10 @@ namespace WebMVC.Controllers
         }
 
         // GET: QueueMembers/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["QueueId"] = new SelectList(_context.Queues, "Id", "Id");
+            var queues = await _queueService.GetAllAsync();
+            ViewData["QueueId"] = new SelectList(queues, "Id", "Id");
             return View();
         }
 
@@ -64,7 +65,8 @@ namespace WebMVC.Controllers
                 await _service.AddAsync(queueMember);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["QueueId"] = new SelectList(_context.Queues, "Id", "Id", queueMember.QueueId);
+            var queues = await _queueService.GetAllAsync();
+            ViewData["QueueId"] = new SelectList(queues, "Id", "Id", queueMember.QueueId);
             return View(queueMember);
         }
 
@@ -81,7 +83,8 @@ namespace WebMVC.Controllers
             {
                 return NotFound();
             }
-            ViewData["QueueId"] = new SelectList(_context.Queues, "Id", "Id", queueMember.QueueId);
+            var queues = await _queueService.GetAllAsync();
+            ViewData["QueueId"] = new SelectList(queues, "Id", "Id", queueMember.QueueId);
             return View(queueMember);
         }
 
@@ -114,7 +117,8 @@ namespace WebMVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["QueueId"] = new SelectList(_context.Queues, "Id", "Id", queueMember.QueueId);
+            var queues = await _queueService.GetAllAsync();
+            ViewData["QueueId"] = new SelectList(queues, "Id", "Id", queueMember.QueueId);
             return View(queueMember);
         }
 

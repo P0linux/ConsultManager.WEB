@@ -1,5 +1,6 @@
 ﻿using DAL.Abstraction;
 using DAL.Entities;
+using DAL.Implementation.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +27,9 @@ namespace DAL.Implementation
             .AddSignInManager();
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IQueueRepository, QueueRepository>();
+            services.AddScoped<IQueueMemberRepository, QueueMemberRepository>();
+            services.AddScoped<IConsultationRepository, ConsultationRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             return services;
         }
