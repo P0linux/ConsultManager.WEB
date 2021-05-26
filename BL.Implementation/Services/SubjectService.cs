@@ -50,5 +50,10 @@ namespace BL.Implementation.Services
 
             await _unitOfWork.CommitAsync();
         }
+
+        public bool SubjectExists(int id)
+        {
+            return _unitOfWork.SubjectRepository.Exists(id);
+        }
     }
 }

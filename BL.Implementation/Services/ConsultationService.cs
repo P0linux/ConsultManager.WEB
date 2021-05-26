@@ -23,6 +23,11 @@ namespace BL.Implementation.Services
             await _unitOfWork.CommitAsync();
         }
 
+        public bool ConsultationExists(int id)
+        {
+            return _unitOfWork.ConsultationRepository.Exists(id);
+        }
+
         public async Task DeleteByIdAsync(int id)
         {
             var consult = await _unitOfWork.ConsultationRepository.GetByIdAsync(id);

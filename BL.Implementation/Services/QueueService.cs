@@ -53,6 +53,11 @@ namespace BL.Implementation.Services
             return queue.AdaptToDTO();
         }
 
+        public bool QueueExists(int id)
+        {
+            return _unitOfWork.QueueRepository.Exists(id);
+        }
+
         public async Task UpdateAsync(QueueDTO queue)
         {
             _unitOfWork.QueueRepository.Update(queue.AdaptToQueue());

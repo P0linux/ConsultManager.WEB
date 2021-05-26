@@ -91,5 +91,10 @@ namespace BL.Implementation.Services
 
             return newQueueMembers;
         }
+
+        public bool QueueMemberExists(int id)
+        {
+            return _unitOfWork.QueueMemberRepository.Exists(id);
+        }
     }
 }

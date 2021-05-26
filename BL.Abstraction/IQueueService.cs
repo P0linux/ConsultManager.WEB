@@ -12,5 +12,6 @@ namespace BL.Abstraction
         Task<QueueDTO> GetByIdAsync(int id);
         Task UpdateAsync(QueueDTO queue);
         Task<IEnumerable<QueueDTO>> GetByConsultationIdAsync(int id);
+        bool QueueExists(int id);
     }
 }

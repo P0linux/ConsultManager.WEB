@@ -11,5 +11,6 @@ namespace BL.Abstraction
         Task DeleteByIdAsync(int id);
         Task<ConsultationDTO> GetByIdAsync(int id);
         Task UpdateAsync(ConsultationDTO consultation);
+        bool ConsultationExists(int id);
     }
 }

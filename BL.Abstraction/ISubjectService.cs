@@ -11,5 +11,6 @@ namespace BL.Abstraction
         Task DeleteByIdAsync(int id);
         Task<SubjectDTO> GetByIdAsync(int id);
         Task UpdateAsync(SubjectDTO subject);
+        bool SubjectExists(int id);
     }
 }
