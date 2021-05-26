@@ -10,7 +10,7 @@ namespace DAL.Abstraction
         UserManager<User> UserManager { get; }
         RoleManager<IdentityRole> RoleManager { get; }
         IRepository<Consultation> ConsultationRepository { get; }
-        IRepository<Queue> QueueRepository { get; }
+        IQueueRepository QueueRepository { get; }
         IRepository<QueueMember> QueueMemberRepository { get; }
         IRepository<Subject> SubjectRepository { get; }
 

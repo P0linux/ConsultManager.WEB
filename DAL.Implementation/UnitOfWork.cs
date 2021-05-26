@@ -1,5 +1,6 @@
 ﻿using DAL.Abstraction;
 using DAL.Entities;
+using DAL.Implementation.Repositories;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 
@@ -20,9 +21,9 @@ namespace DAL.Implementation
         public IRepository<Consultation> ConsultationRepository =>
             _consultationRepository ??= new Repository<Consultation>(_context);
 
-        IRepository<Queue> _queueRepository;
-        public IRepository<Queue> QueueRepository =>
-            _queueRepository ??= new Repository<Queue>(_context);
+        IQueueRepository _queueRepository;
+        public IQueueRepository QueueRepository =>
+            _queueRepository ??= new QueueRepository(_context);
 
         IRepository<QueueMember> _queueMemberRepository;
         public IRepository<QueueMember> QueueMemberRepository =>
