@@ -2,7 +2,26 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to ConsultationManager</h1>
-    <p></p>
-</div>
+@if (User.Identity.IsAuthenticated)
+{
+    <p>@User.Identity.Name</p>
+
+    @if (User.IsInRole("lecturer"))
+    {
+        <a asp-controller="Subjects" asp-action="Index">Subjects Manager</a>
+        <br />
+    }
+    else if (User.IsInRole("student"))
+    {
+        <a asp-controller="QueueMembers" asp-action="Index">Asiing to queue</a>
+    }
+
+    <form method="post" asp-controller="Account" asp-action="Logout">
+        <input type="submit" value="Log out" />
+    </form>
+}
+else
+{
+    <a asp-controller="Account" asp-action="Login">Login</a>
+    <a asp-controller="Account" asp-action="Register">Register</a>
+}

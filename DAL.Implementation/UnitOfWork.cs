@@ -10,11 +10,15 @@ namespace DAL.Implementation
     {
         ApplicationContext _context;
 
-        public UnitOfWork(ApplicationContext context, UserManager<User> userManager, SignInManager<User> signInManager)
+        public UnitOfWork(ApplicationContext context, 
+                          UserManager<User> userManager, 
+                          SignInManager<User> signInManager, 
+                          RoleManager<IdentityRole> roleManager)
         {
             _context = context;
             UserManager = userManager;
             SignInManager = signInManager;
+            RoleManager = roleManager;
         }
 
         IConsultationRepository _consultationRepository;

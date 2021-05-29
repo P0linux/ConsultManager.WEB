@@ -13,6 +13,7 @@ namespace BL.Implementation
             services.AddTransient<IQueueService, QueueService>();
             services.AddTransient<ISubjectService, SubjectService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<MVCUserService, MVCUserService>();
 
             return services;
         }

@@ -26,5 +26,7 @@ namespace BL.DTO.Models
         [Required]
         [Display(Name = "User Role")]
         public string UserRole { get; set; }
+
+        public List<IdentityRole> AllRoles { get; set; }
     }
 }
