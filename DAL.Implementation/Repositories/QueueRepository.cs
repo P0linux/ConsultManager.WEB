@@ -27,7 +27,10 @@ namespace DAL.Implementation.Repositories
 
             if (filter != null) entities = entities.Where(filter);
 
-            return entities.Include(q => q.Consultation);
+            return entities.Include(q => q.Consultation)
+                           .ThenInclude(c => c.Lecturer)
+                           .Include(c => c.Consultation)
+                           .ThenInclude(c => c.Subject);
         }
     }
 }

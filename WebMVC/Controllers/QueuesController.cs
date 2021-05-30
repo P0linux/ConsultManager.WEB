@@ -9,24 +9,27 @@ using DAL.Entities;
 using DAL.Implementation;
 using BL.Abstraction;
 using BL.DTO.Models;
+using BL.DTO;
 
 namespace WebMVC.Controllers
 {
     public class QueuesController : Controller
     {
         private readonly IQueueService _service;
-        ApplicationContext _context;
         private readonly IConsultationService _consultationService;
 
-        public QueuesController(IQueueService service, ApplicationContext context)
+        public QueuesController(IQueueService service, 
+                                ApplicationContext context, 
+                                IConsultationService consultationService)
         {
             _service = service;
-            _context = context;
+            _consultationService = consultationService;
         }
 
         // GET: Queues
         public async Task<IActionResult> Index()
         {
+
             return View(await _service.GetAllAsync());
         }
 
@@ -48,9 +51,19 @@ namespace WebMVC.Controllers
         }
 
         // GET: Queues/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["ConsultationId"] = new SelectList(_context.Consultations, "Id", "Id");
+            var consultations = await _consultationService.GetAllAsync();
+            
+            var query = consultations.Select(c => new { Id = c.Id,
+                DisplayText = String.Format("{0} {1} {2} {3}", c.Lecturer.FirstName, c.Lecturer.SecondName, c.Subject.Name, c.Date) });
+            ViewData["ConsultationId"] = new SelectList(query, "Id", "DisplayText");
+
+            var enamData = Enum.GetValues(typeof(IssueCategory))
+                               .OfType<Enum>()
+                               .Select(e => new { Id = Convert.ToInt32(e), Display = Enum.GetName(typeof(IssueCategory), e)});
+            ViewData["IssueCategory"] = new SelectList(enamData, "Id", "Display");
+
             return View();
         }
 
@@ -64,7 +77,8 @@ namespace WebMVC.Controllers
                 await _service.AddAsync(queue);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ConsultationId"] = new SelectList(_context.Consultations, "Id", "Id", queue.ConsultationId);
+            var consultations = await _consultationService.GetAllAsync();
+            ViewData["ConsultationId"] = new SelectList(consultations, "Id", "Id", queue.ConsultationId);
             return View(queue);
         }
 
@@ -81,7 +95,9 @@ namespace WebMVC.Controllers
             {
                 return NotFound();
             }
-            ViewData["ConsultationId"] = new SelectList(_context.Consultations, "Id", "Id", queue.ConsultationId);
+
+            var consultations = await _consultationService.GetAllAsync();
+            ViewData["ConsultationId"] = new SelectList(consultations, "Id", "Id", queue.ConsultationId);
             return View(queue);
         }
 
@@ -114,7 +130,9 @@ namespace WebMVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ConsultationId"] = new SelectList(_context.Consultations, "Id", "Id", queue.ConsultationId);
+
+            var consultations = await _consultationService.GetAllAsync();
+            ViewData["ConsultationId"] = new SelectList(consultations, "Id", "Id", queue.ConsultationId);
             return View(queue);
         }
 

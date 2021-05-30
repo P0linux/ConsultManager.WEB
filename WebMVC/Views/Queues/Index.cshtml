@@ -34,7 +34,14 @@
                 @Html.DisplayFor(modelItem => item.Priority)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Consultation.Id)
+                @{
+                    var content = String.Format("{0} {1} {2} {3}", 
+                                                item.Consultation.Lecturer.FirstName,
+                                                item.Consultation.Lecturer.SecondName,
+                                                item.Consultation.Subject.Name,
+                                                item.Consultation.Date);
+                }
+                @Html.DisplayFor(modelItem => content)
             </td>
             <td>
                 <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
