@@ -11,6 +11,6 @@ namespace DAL.Entities
         public Queue Queue { get; set; }
         public int QueueId { get; set; }
         public User Student { get; set; }
-        public int StudentId { get; set; }
+        public string StudentId { get; set; }
     }
 }

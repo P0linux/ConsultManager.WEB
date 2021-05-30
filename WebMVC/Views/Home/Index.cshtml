@@ -4,24 +4,85 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    <p>@User.Identity.Name</p>
-
     @if (User.IsInRole("lecturer"))
     {
-        <a asp-controller="Subjects" asp-action="Index">Subjects Manager</a>
-        <br />
+        <div class="text-center my-xl-5">
+            <h1>Choose an option to continue working</h1>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="./img/consult.jpg" height="155" class="card-img-top" alt="No image downloaded">
+                    <div class="card-body">
+                        <h5 class="card-title">Create consultation</h5>
+                        <p class="card-text">To create consultation click below and input required data.</p>
+                        <a class="btn btn-primary" style="background-color: rosybrown; border-color: palevioletred" asp-area="" asp-controller="Consultations" asp-action="Index">Create consultation</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="./img/students.jpg" height="155" class="card-img-top" alt="No image downloaded">
+                    <div class="card-body">
+                        <h5 class="card-title">Get all students</h5>
+                        <p class="card-text">To get students click below and choose consultation.</p>
+                        <a class="btn btn-primary" style="background-color: rosybrown; border-color: palevioletred" asp-area="" asp-controller="QueueMembers" asp-action="Index">Get students</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="./img/absent1.png" height="155" class="card-img-top" alt="No image downloaded">
+                    <div class="card-body">
+                        <h5 class="card-title">Mark absent</h5>
+                        <p class="card-text">To mark an absent student click below and choose a student.</p>
+                        <a class="btn btn-primary" style="background-color: rosybrown; border-color: palevioletred" asp-area="" asp-controller="QueueMembers" asp-action="Index">Mark absent</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4" style="margin-top: 20px">
+                <div class="card" style="width: 18rem;">
+                    <img src="./img/subject.jpg" height="155" class="card-img-top" alt="No image downloaded">
+                    <div class="card-body">
+                        <h5 class="card-title">Create subject</h5>
+                        <p class="card-text">To create a subject click below and input data.</p>
+                        <a class="btn btn-primary" style="background-color: rosybrown; border-color: palevioletred" asp-area="" asp-controller="Subjects" asp-action="Create">Create subject</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     }
     else if (User.IsInRole("student"))
     {
-        <a asp-controller="QueueMembers" asp-action="Index">Asiing to queue</a>
+        <div class="text-center my-xl-5">
+            <h1>Choose an option to continue working</h1>
+        </div>
+        <div class="row" style="margin: 0 0 0 15%">
+            <div class="col-lg-6">
+                <div class="card" style="width: 18rem;">
+                    <img src="./img/consult.jpg" height="155" class="card-img-top" alt="No image downloaded">
+                    <div class="card-body">
+                        <h5 class="card-title">Book for consultation</h5>
+                        <p class="card-text">To book for consultation click below and choose consultation.</p>
+                        <a class="btn btn-primary" style="background-color: rosybrown; border-color: palevioletred" asp-area="" asp-controller="Consultations" asp-action="Index">Book consultation</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card" style="width: 18rem;">
+                    <img src="./img/students.jpg" height="155" class="card-img-top" alt="No image downloaded">
+                    <div class="card-body">
+                        <h5 class="card-title">Get consultations</h5>
+                        <p class="card-text">To get consultation information click below.</p>
+                        <a class="btn btn-primary" style="background-color: rosybrown; border-color: palevioletred" asp-area="" asp-controller="QueueMembers" asp-action="Index">Get consultations</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     }
-
-    <form method="post" asp-controller="Account" asp-action="Logout">
-        <input type="submit" value="Log out" />
-    </form>
 }
 else
 {
-    <a asp-controller="Account" asp-action="Login">Login</a>
-    <a asp-controller="Account" asp-action="Register">Register</a>
+    <h1>Please, login or register to get started</h1>
 }

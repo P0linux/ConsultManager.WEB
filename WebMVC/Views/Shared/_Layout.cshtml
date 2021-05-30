@@ -38,6 +38,25 @@
                         </li>
                     </ul>
                 </div>
+                <ul class="flex-grow"></ul>
+                @if (User is not null && !User.Identity.IsAuthenticated)
+                {
+                    <li style="list-style-type: none">
+                        <a class="btn btn-primary mr-2" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                    </li>
+                    <li style="list-style-type: none">
+                        <a class="btn btn-success" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="text-dark" style="list-style-type: none">
+                        <h5>@User.Identity.Name</h5>
+                    </li>
+                    <form method="post" asp-controller="Account" asp-action="Logout">
+                        <button class="mx-2 btn btn-danger" style="align-self: flex-end" type="submit">Logout</button>
+                    </form>
+                }
             </div>
         </nav>
     </header>

@@ -9,7 +9,7 @@ namespace BL.DTO.Models
         public bool IsAbsent { get; set; }
         public int QueueId { get; set; }
         public QueueDTO Queue { get; set; }
-        public int StudentId { get; set; }
+        public string StudentId { get; set; }
         public int Id { get; set; }
     }
 }

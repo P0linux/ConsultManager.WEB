@@ -9,16 +9,21 @@ using DAL.Entities;
 using DAL.Implementation;
 using BL.Abstraction;
 using BL.DTO.Models;
+using System.Security.Claims;
 
 namespace WebMVC.Controllers
 {
     public class ConsultationsController : Controller
     {
         private readonly IConsultationService _service;
+        private readonly ISubjectService _subjectService;
         ApplicationContext _context;
 
-        public ConsultationsController(IConsultationService service, ApplicationContext context)
+        public ConsultationsController(IConsultationService service, 
+                                       ApplicationContext context, 
+                                       ISubjectService subjectService)
         {
+            _subjectService = subjectService;
             _service = service;
             _context = context;
         }
@@ -47,9 +52,10 @@ namespace WebMVC.Controllers
         }
 
         // GET: Consultations/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["SubjectId"] = new SelectList(_context.Subjects, "Id", "Id");
+            var subjects = await _subjectService.GetAllAsync();
+            ViewData["Subject"] = new SelectList(subjects, "Id", "Name");
             return View();
         }
 
@@ -58,12 +64,17 @@ namespace WebMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Date,SubjectId,LecturerId,Id")] ConsultationDTO consultation)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            consultation.LecturerId = userId;
+
             if (ModelState.IsValid)
             {
                 await _service.AddAsync(consultation);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SubjectId"] = new SelectList(_context.Subjects, "Id", "Id", consultation.SubjectId);
+
+            var subjects = await _subjectService.GetAllAsync();
+            ViewData["SubjectId"] = new SelectList(subjects, "Id", "Id", consultation.SubjectId);
             return View(consultation);
         }
 
@@ -80,7 +91,9 @@ namespace WebMVC.Controllers
             {
                 return NotFound();
             }
-            ViewData["SubjectId"] = new SelectList(_context.Subjects, "Id", "Id", consultation.SubjectId);
+
+            var subjects = await _subjectService.GetAllAsync();
+            ViewData["SubjectId"] = new SelectList(subjects, "Id", "Id", consultation.SubjectId);
             return View(consultation);
         }
 
@@ -113,7 +126,9 @@ namespace WebMVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SubjectId"] = new SelectList(_context.Subjects, "Id", "Id", consultation.SubjectId);
+
+            var subjects = await _subjectService.GetAllAsync();
+            ViewData["SubjectId"] = new SelectList(subjects, "Id", "Id", consultation.SubjectId);
             return View(consultation);
         }
 
