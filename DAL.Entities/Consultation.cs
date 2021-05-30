@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAL.Entities
 {
@@ -9,6 +10,8 @@ namespace DAL.Entities
         public int SubjectId { get; set; }
         public Subject Subject { get; set; }
         public string LecturerId { get; set; }
+
+        [ForeignKey("LecturerId")]
         public User Lecturer { get; set; }
     }
 }

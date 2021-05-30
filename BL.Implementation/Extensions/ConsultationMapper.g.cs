@@ -15,6 +15,7 @@ namespace BL.Implementation.Extensions
                 SubjectId = p1.SubjectId,
                 Subject = p1.Subject.AdaptToSubject(),
                 LecturerId = p1.LecturerId,
+                Lecturer = p1.Lecturer.AdaptToUser(),
                 Id = p1.Id
             };
         }
@@ -30,6 +31,7 @@ namespace BL.Implementation.Extensions
             result.SubjectId = p2.SubjectId;
             result.Subject = p2.Subject.AdaptToSubject();
             result.LecturerId = p2.LecturerId;
+            result.Lecturer = p2.Lecturer.AdaptToUser();
             result.Id = p2.Id;
             return result;
             
@@ -40,6 +42,7 @@ namespace BL.Implementation.Extensions
             SubjectId = p4.SubjectId,
             Subject = p4.Subject.AdaptToSubject(),
             LecturerId = p4.LecturerId,
+            Lecturer = p4.Lecturer.AdaptToUser(),
             Id = p4.Id
         };
         public static ConsultationDTO AdaptToDTO(this Consultation p5)
@@ -50,6 +53,7 @@ namespace BL.Implementation.Extensions
                 SubjectId = p5.SubjectId,
                 Subject = p5.Subject.AdaptToDTO(),
                 LecturerId = p5.LecturerId,
+                Lecturer = p5.Lecturer.AdaptToDTO(),
                 Id = p5.Id
             };
         }
@@ -65,6 +69,7 @@ namespace BL.Implementation.Extensions
             result.SubjectId = p6.SubjectId;
             result.Subject = p6.Subject.AdaptToDTO();
             result.LecturerId = p6.LecturerId;
+            result.Lecturer = p6.Lecturer.AdaptToDTO();
             result.Id = p6.Id;
             return result;
             
@@ -75,6 +80,7 @@ namespace BL.Implementation.Extensions
             SubjectId = p8.SubjectId,
             Subject = p8.Subject.AdaptToDTO(),
             LecturerId = p8.LecturerId,
+            Lecturer = p8.Lecturer.AdaptToDTO(),
             Id = p8.Id
         };
     }

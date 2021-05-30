@@ -27,14 +27,14 @@
                 <select asp-for="ConsultationId" class ="form-control" asp-items="ViewBag.ConsultationId"></select>
             </div>
             <div class="form-group">
-                <input class="btn btn-primary" style="background-color: rosybrown; border-color: palevioletred" type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-outline-success" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-outline-secondary" asp-action="Index">Get all queues</a>
 </div>
 
 @section Scripts {

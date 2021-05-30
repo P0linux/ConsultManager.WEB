@@ -40,6 +40,7 @@ namespace BL.Implementation.Services
         {
             var consultations = _unitOfWork.ConsultationRepository.GetAllAsync()
                                            .Select(ConsultationMapper.ProjectToDTO);
+            
             return await consultations.ToListAsync();
         }
 

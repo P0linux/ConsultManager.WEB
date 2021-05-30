@@ -18,23 +18,18 @@
                 <span asp-validation-for="Date" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SubjectId" class="control-label"></label>
+                <label asp-for="Subject" class="control-label"></label>
                 <select asp-for="SubjectId" class ="form-control" asp-items="ViewBag.Subject"></select>
             </div>
             <div class="form-group">
-                <label asp-for="LecturerId" class="control-label"></label>
-                <input asp-for="LecturerId" class="form-control" />
-                <span asp-validation-for="LecturerId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input class="btn btn-primary" style="background-color: rosybrown; border-color: palevioletred" type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-outline-success" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-outline-secondary" asp-action="Index">Get all consultations</a>
 </div>
 
 @section Scripts {

@@ -19,7 +19,7 @@
                 @Html.DisplayNameFor(model => model.Subject)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LecturerId)
+                @Html.DisplayNameFor(model => model.Lecturer)
             </th>
             <th></th>
         </tr>
@@ -34,7 +34,11 @@
                 @Html.DisplayFor(modelItem => item.Subject.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LecturerId)
+                @{
+                    var content = item.Lecturer.FirstName + " " + item.Lecturer.SecondName;
+                }
+                @Html.DisplayFor(modelItem => content)
+
             </td>
             <td>
                 <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
