@@ -112,7 +112,14 @@ namespace WebMVC.Controllers
                 return NotFound();
             }
             var queues = await _queueService.GetAllAsync();
-            ViewData["QueueId"] = new SelectList(queues, "Id", "Id", queueMember.QueueId);
+
+            var query = queues.Select(q => new
+            {
+                Id = q.Id,
+                DisplayText = String.Format("{0} {1} {2} {3}", q.Consultation.Lecturer.SecondName,
+                q.Consultation.Subject.Name, q.Consultation.Date, q.IssueCategory.ToString())
+            });
+            ViewData["QueueId"] = new SelectList(query, "Id", "DisplayText", queueMember.QueueId);
             return View(queueMember);
         }
 
@@ -146,7 +153,15 @@ namespace WebMVC.Controllers
                 return RedirectToAction(nameof(Index));
             }
             var queues = await _queueService.GetAllAsync();
-            ViewData["QueueId"] = new SelectList(queues, "Id", "Id", queueMember.QueueId);
+
+            var query = queues.Select(q => new
+            {
+                Id = q.Id,
+                DisplayText = String.Format("{0} {1} {2} {3}", q.Consultation.Lecturer.SecondName,
+                q.Consultation.Subject.Name, q.Consultation.Date, q.IssueCategory.ToString())
+            });
+            ViewData["QueueId"] = new SelectList(query, "Id", "DisplayText", queueMember.QueueId);
+
             return View(queueMember);
         }
 
