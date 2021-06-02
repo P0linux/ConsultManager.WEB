@@ -44,7 +44,7 @@ namespace BL.Implementation.Services
 
             var queueMembers = await GetAllAsync();
 
-            return await queueMembers.AsQueryable().FirstOrDefaultAsync(qm => qm.Id == id);
+            return await Task.FromResult(queueMembers.FirstOrDefault(qm => qm.Id == id));
         }
 
         public async Task<IEnumerable<QueueMemberDTO>> GetByQueueIdAsync(int id)
@@ -53,7 +53,7 @@ namespace BL.Implementation.Services
                 .GetAllAsync(qm => qm.QueueId == id)
                 .Select(QueueMemberMapper.ProjectToDTO);
 
-            return await CalculatePrioritiesByGroup(queueMembers).AsQueryable().ToListAsync();
+            return await Task.FromResult(CalculatePrioritiesByGroup(queueMembers).ToList());
         }
 
         public async Task UpdateAsync(QueueMemberDTO queueMember)

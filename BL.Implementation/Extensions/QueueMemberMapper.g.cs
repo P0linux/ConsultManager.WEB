@@ -17,6 +17,7 @@ namespace BL.Implementation.Extensions
                 QueueId = p1.QueueId,
                 Queue = p1.Queue.AdaptToQueue(),
                 StudentId = p1.StudentId,
+                Student = p1.Student.AdaptToUser(),
                 Id = p1.Id
             };
         }
@@ -34,6 +35,7 @@ namespace BL.Implementation.Extensions
             result.QueueId = p2.QueueId;
             result.Queue = p2.Queue.AdaptToQueue();
             result.StudentId = p2.StudentId;
+            result.Student = p2.Student.AdaptToUser();
             result.Id = p2.Id;
             return result;
             
@@ -46,6 +48,7 @@ namespace BL.Implementation.Extensions
             QueueId = p4.QueueId,
             Queue = p4.Queue.AdaptToQueue(),
             StudentId = p4.StudentId,
+            Student = p4.Student.AdaptToUser(),
             Id = p4.Id
         };
         public static QueueMemberDTO AdaptToDTO(this QueueMember p5)
@@ -58,6 +61,7 @@ namespace BL.Implementation.Extensions
                 QueueId = p5.QueueId,
                 Queue = p5.Queue.AdaptToDTO(),
                 StudentId = p5.StudentId,
+                Student = p5.Student.AdaptToDTO(),
                 Id = p5.Id
             };
         }
@@ -75,6 +79,7 @@ namespace BL.Implementation.Extensions
             result.QueueId = p6.QueueId;
             result.Queue = p6.Queue.AdaptToDTO();
             result.StudentId = p6.StudentId;
+            result.Student = p6.Student.AdaptToDTO();
             result.Id = p6.Id;
             return result;
             
@@ -87,6 +92,7 @@ namespace BL.Implementation.Extensions
             QueueId = p8.QueueId,
             Queue = p8.Queue.AdaptToDTO(),
             StudentId = p8.StudentId,
+            Student = p8.Student.AdaptToDTO(),
             Id = p8.Id
         };
     }

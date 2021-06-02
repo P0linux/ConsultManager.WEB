@@ -21,13 +21,14 @@ namespace DAL.Implementation.Repositories
             _dbSet = context.Set<QueueMember>();
         }
 
-        public new IQueryable<QueueMember> GetAllAsync(Expression<Func<QueueMember, bool>> filter)
+        public new IQueryable<QueueMember> GetAllAsync(Expression<Func<QueueMember, bool>> filter = null)
         {
             IQueryable<QueueMember> entities = _dbSet;
 
             if (filter != null) entities = entities.Where(filter);
 
-            return entities.Include(q => q.Queue)
+            return entities.Include(q => q.Queue).ThenInclude(q => q.Consultation).ThenInclude(q => q.Lecturer)
+                           .Include(q => q.Queue).ThenInclude(q => q.Consultation).ThenInclude(q => q.Subject)
                            .Include(q => q.Student);
         }
     }

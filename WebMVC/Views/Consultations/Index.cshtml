@@ -43,7 +43,8 @@
             <td>
                 <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a class="btn btn-outline-secondary" asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+                <a class="btn btn-outline-success" asp-controller="Queues" asp-action="Create">Create queue</a> 
             </td>
         </tr>
 }

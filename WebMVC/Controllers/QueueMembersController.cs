@@ -9,6 +9,7 @@ using DAL.Entities;
 using DAL.Implementation;
 using BL.Abstraction;
 using BL.DTO.Models;
+using System.Security.Claims;
 
 namespace WebMVC.Controllers
 {
@@ -16,18 +17,34 @@ namespace WebMVC.Controllers
     {
         private readonly IQueueMemberService _service;
         private readonly IQueueService _queueService;
+        private readonly IConsultationService _consultationService;
 
-        public QueueMembersController(IQueueMemberService service, IQueueService queueService)
+        public QueueMembersController(IQueueMemberService service, IQueueService queueService, IConsultationService consultationService)
         {
             _queueService = queueService;
             _service = service;
+            _consultationService = consultationService;
         }
 
         // GET: QueueMembers
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? consultationId)
         {
+            var consultations = await _consultationService.GetAllAsync();
+
+            var query = consultations.Select(c => new {
+                Id = c.Id,
+                DisplayText = String.Format("{0} {1} {2} {3}", c.Lecturer.FirstName, c.Lecturer.SecondName, c.Subject.Name, c.Date)
+            });
+
+            ViewData["ConsultationId"] = new SelectList(query, "Id", "DisplayText");
+
+            if (consultationId is null)
+            {
+                return View(await _service.GetAllAsync());
+            }
+
             var members = await _service.GetAllAsync();
-            return View(members);
+            return View(members.Where(m => m.Queue.ConsultationId == consultationId));
         }
 
         // GET: QueueMembers/Details/5
@@ -51,7 +68,15 @@ namespace WebMVC.Controllers
         public async Task<IActionResult> Create()
         {
             var queues = await _queueService.GetAllAsync();
-            ViewData["QueueId"] = new SelectList(queues, "Id", "Id");
+
+            var query = queues.Select(q => new
+            {
+                Id = q.Id,
+                DisplayText = String.Format("{0} {1} {2} {3}", q.Consultation.Lecturer.SecondName, 
+                q.Consultation.Subject.Name, q.Consultation.Date, q.IssueCategory.ToString())
+            });
+
+            ViewData["QueueId"] = new SelectList(query, "Id", "DisplayText");
             return View();
         }
 
@@ -60,6 +85,9 @@ namespace WebMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Priority,TimeInterval,IsAbsent,QueueId,StudentId,Id")] QueueMemberDTO queueMember)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            queueMember.StudentId = userId;
+
             if (ModelState.IsValid)
             {
                 await _service.AddAsync(queueMember);
