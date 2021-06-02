@@ -9,6 +9,7 @@ using DAL.Entities;
 using DAL.Implementation;
 using BL.Abstraction;
 using BL.DTO.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebMVC.Controllers
 {
@@ -45,6 +46,7 @@ namespace WebMVC.Controllers
         }
 
         // GET: Subjects/Create
+        [Authorize(Roles ="lecturer")]
         public IActionResult Create()
         {
             return View();
